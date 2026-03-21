@@ -6,7 +6,9 @@ function Layout() {
       </sidebar>
       <div className="flex flex-col w-full">
         <nav className="">Nav</nav>
-        <main className="bg-stone-100 h-full w-full ">Main content</main>
+        <main className="bg-stone-100 h-full w-full flex justify-center items-center text-9xl text-orange-500 font-bold">
+          Atif finally your project is start
+        </main>
       </div>
     </div>
   );

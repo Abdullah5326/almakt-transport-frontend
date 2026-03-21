@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 
-/data
+data
 
 
 # Editor directories and files
