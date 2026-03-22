@@ -1,14 +1,19 @@
+import { Outlet } from "react-router-dom";
+import Dashboard from "../features/dashboard/Dashboard";
+import Navbar from "../ui/Navbar";
+import Sidebar from "../ui/Sidebar";
+
 function Layout() {
   return (
-    <div className="h-dvh flex">
-      <sidebar className="bg-white w-50 ">
-        <h1>Sidebar</h1>
-      </sidebar>
-      <div className="flex flex-col w-full">
-        <nav className="">Nav</nav>
-        <main className="bg-stone-100 h-full w-full flex justify-center items-center text-9xl text-orange-500 font-bold">
-          Atif finally your project is start
-        </main>
+    <div className=" bg-stone-200 h-screen overflow-hidden">
+      <div className=" flex">
+        <Sidebar />
+        <div className="flex flex-col w-full">
+          <Navbar />
+          <main className="bg-stone-50 h-full w-full pt-6 pl-5 ">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
