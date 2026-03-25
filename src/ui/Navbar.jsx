@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { HiSearch } from "react-icons/hi";
 import { HiOutlineMoon, HiPlus } from "react-icons/hi2";
+import AddTripForm from "../features/trip/AddTripForm";
 
 function Navbar() {
+  const [showAddForm, setShowAddForm] = useState(false);
   return (
     <nav className="bg-white py-3 pl-6 flex justify-between pr-8">
       <div className="relative">
@@ -20,12 +23,19 @@ function Navbar() {
           <span className="cursor-pointer">
             <HiOutlineMoon />
           </span>
-          <span className="cursor-pointer relative group">
+          <button
+            className="cursor-pointer relative group"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowAddForm(true);
+            }}
+          >
             <HiPlus />
             <p className="bg-stone-50 hidden group-hover:block absolute text-nowrap -bottom-10 px-2 py-1 rounded-full text-stone-500">
               Add Trip
             </p>
-          </span>
+          </button>
+          {showAddForm && <AddTripForm setShowAddForm={setShowAddForm} />}
         </div>
         <div className="flex gap-2">
           <img

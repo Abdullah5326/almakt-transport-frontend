@@ -10,7 +10,7 @@ function Layout() {
         <Sidebar />
         <div className="flex flex-col w-full">
           <Navbar />
-          <main className="bg-stone-50 h-full w-full pt-6 pl-5 ">
+          <main className="bg-stone-100 h-full w-full pt-6 pl-5 ">
             <Outlet />
           </main>
         </div>

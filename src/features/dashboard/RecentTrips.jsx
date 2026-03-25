@@ -1,7 +1,7 @@
 import RecentTrip from "./RecentTrip";
 import SecondaryHeading from "./../../ui/SecondaryHeading";
 
-function RecentTrips() {
+function RecentTrips({ recentTrips }) {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border border-stone-200">
       <div className="mb-8">
@@ -19,14 +19,9 @@ function RecentTrips() {
       </div>
 
       <ul className="text-sm font-semibold overflow-auto h-50">
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
-        <RecentTrip />
+        {recentTrips.map((trip) => (
+          <RecentTrip trip={trip} key={trip._id} />
+        ))}
       </ul>
     </div>
   );

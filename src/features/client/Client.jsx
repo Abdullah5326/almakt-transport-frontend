@@ -1,7 +1,33 @@
 import PrimaryHeading from "../../ui/PrimaryHeading";
+import ClientListItem from "./ClientListItem";
+import { useClients } from "./useClients";
 
 function Client() {
-  return <PrimaryHeading>Clients</PrimaryHeading>;
+  const { clients, isPending } = useClients();
+  if (isPending) return <div>Loading...</div>;
+  return (
+    <div>
+      <div className="px-8">
+        <div className="mb-10">
+          <PrimaryHeading>Clients</PrimaryHeading>
+          <p>Here is your business client</p>
+        </div>
+        <div className="rounded-2xl bg-white h-screen border-2 border-stone-200">
+          <div className="border-b-2 border-stone-200 grid grid-cols-[5rem_1fr_1fr_1fr] py-4 rounded-t-lg px-2">
+            <p>S.No</p>
+            <p>Name</p>
+            <p>Trips</p>
+            <p>Status</p>
+          </div>
+          <ul className="divide-y divide-stone-100 overflow-y-auto h-110">
+            {clients.map((client, i) => (
+              <ClientListItem client={client} no={i} key={client.id} />
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Client;

@@ -9,7 +9,7 @@ import {
 
 function Sidebar() {
   return (
-    <sidebar className="w-70 border border-stone-200 bg-white pt-2 space-y-15 h-screen">
+    <aside className="w-70 border border-stone-200 bg-white pt-2 space-y-15 h-screen">
       <div>
         <Link
           to="/"
@@ -47,7 +47,7 @@ function Sidebar() {
           </SidebarItem>
         </div>
       </div>
-    </sidebar>
+    </aside>
   );
 }
 
