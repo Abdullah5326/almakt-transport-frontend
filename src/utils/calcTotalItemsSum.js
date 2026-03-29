@@ -1,5 +1,6 @@
 export function calcTotalItemsSum(items, attributeName) {
-  const result = items.reduce((prev, cur) => prev + cur[attributeName], 0);
-
+  const result = items.reduce((prev, cur) => {
+    return prev + cur[attributeName];
+  }, 0);
   return result;
 }

@@ -13,7 +13,7 @@ function Sidebar() {
       <div>
         <Link
           to="/"
-          className="uppercase text-orange-500 text-1xl font-bold flex items-center gap-2 border-b border-stone-300 pb-4 pl-4"
+          className="uppercase text-orange-500 text-1xl font-bold flex items-center gap-2 border-b border-stone-300 pb-5 pl-4"
         >
           <span className="text-2xl flex items-center">🚛</span>
           <span className=" pt-2">Al-makt</span>

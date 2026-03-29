@@ -6,7 +6,7 @@ import AddTripForm from "../features/trip/AddTripForm";
 function Navbar() {
   const [showAddForm, setShowAddForm] = useState(false);
   return (
-    <nav className="bg-white py-3 pl-6 flex justify-between pr-8">
+    <nav className="bg-white py-3 pl-6 flex justify-between pr-8 border-b border-stone-300">
       <div className="relative">
         <input
           type="text"

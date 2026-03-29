@@ -6,7 +6,7 @@ function Client() {
   const { clients, isPending } = useClients();
   if (isPending) return <div>Loading...</div>;
   return (
-    <div>
+    <div className="p-8">
       <div className="px-8">
         <div className="mb-10">
           <PrimaryHeading>Clients</PrimaryHeading>
@@ -17,7 +17,7 @@ function Client() {
             <p>S.No</p>
             <p>Name</p>
             <p>Trips</p>
-            <p>Status</p>
+            <p>Mobile No</p>
           </div>
           <ul className="divide-y divide-stone-100 overflow-y-auto h-110">
             {clients.map((client, i) => (

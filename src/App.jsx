@@ -5,20 +5,32 @@ import Client from "./features/client/Client";
 import Driver from "./features/driver/Driver";
 import Trip from "./features/trip/Trip";
 import PageNotFound from "./pages/PageNotFound";
+import { Toaster } from "react-hot-toast";
+import store from "./store";
+import { Provider } from "react-redux";
+import TripDetails from "./features/trip/TripDetails";
+import ClientDetails from "./features/client/ClientDetails";
+import DriverDetails from "./features/driver/DriverDetails";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/clients" element={<Client />} />
-          <Route path="/drivers" element={<Driver />} />
-          <Route path="/trips" element={<Trip />} />
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/clients" element={<Client />} />
+            <Route path="/clients/:clientId" element={<ClientDetails />} />
+            <Route path="/drivers" element={<Driver />} />
+            <Route path="/drivers/:driverId" element={<DriverDetails />} />
+            <Route path="/trips" element={<Trip />} />
+            <Route path="/trips/:tripId" element={<TripDetails />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Toaster />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
