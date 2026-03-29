@@ -283,7 +283,7 @@ function AddTripForm({ setShowAddForm }) {
                   })}
                 >
                   <option value="cash">Cash</option>
-                  <option value="online payment">Online Payment</option>
+                  <option value="online">Online Payment</option>
                 </select>
                 {errors?.paymentMethod && (
                   <EmptyFieldErrorMessage
