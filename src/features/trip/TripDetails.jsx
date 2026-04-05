@@ -7,27 +7,29 @@ import {
   HiOutlineUser,
   HiOutlineUsers,
 } from "react-icons/hi2";
-import { Link } from "react-router-dom";
-import PrimaryHeading from "../../ui/PrimaryHeading";
+import { useNavigate } from "react-router-dom";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { GoDotFill } from "react-icons/go";
 import { useTrip } from "./useTrip";
 import { parseDate } from "../../utils/utils";
+import LoadingSpinner from "../../ui/LoadingSpinner";
+import StatusTag from "../../ui/StatusTag";
 
 function TripDetails() {
   const { trip, isLoadingTrip } = useTrip();
+  const navigate = useNavigate();
+  if (isLoadingTrip) return <LoadingSpinner />;
   console.log(trip);
-  if (isLoadingTrip) return <div>Loading...</div>;
   return (
     <div>
       <div className="bg-white py-4 pl-12 pr-30 flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <Link
-            to={"/trips"}
+          <button
+            onClick={() => navigate(-1)}
             className="hover:bg-orange-500 p-3 rounded-lg hover:text-white"
           >
             <HiOutlineArrowLeft className="font-bold" />
-          </Link>
+          </button>
           <div>
             <h2 className="text-2xl font-bold">{trip.name}</h2>
             <p className="text-sm text-stone-500">
@@ -35,8 +37,11 @@ function TripDetails() {
             </p>
           </div>
         </div>
-        <div className={`bg-stone-200  px-4 rounded-full `}>
-          <p>{trip.isCompleted ? "completed" : "Pending"}</p>
+        <div>
+          <StatusTag
+            value={trip.isCompleted}
+            options={{ successText: "Completed", failText: "Pending" }}
+          />
         </div>
       </div>
 
@@ -125,7 +130,9 @@ function TripDetails() {
               </span>
               <div>
                 <p className="text-sm text-stone-500">Client</p>
-                <p className="font-bold">{trip.client.name}</p>
+                <p className="font-bold">
+                  {trip.client?.name || "Mashal Khan"}
+                </p>
               </div>
             </div>
           </div>

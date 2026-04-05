@@ -8,6 +8,7 @@ export function useUpdateTrip() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
   const queryClient = useQueryClient();
   const { clientId } = useParams();
+  const { driverId } = useParams();
 
   const { mutate: updateTrip, isPending: isUpdatingTrip } = useMutation({
     mutationFn: updateTripApi,
@@ -17,6 +18,7 @@ export function useUpdateTrip() {
         queryKey: [`last-${tripsDurationFilter}-trips`],
       });
       if (clientId) queryClient.invalidateQueries([`clients`, clientId]);
+      if (driverId) queryClient.invalidateQueries([`driver`, driverId]);
     },
     onError: () => {
       toast.error("The trip is not updated successfully");

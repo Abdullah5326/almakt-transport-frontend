@@ -3,13 +3,16 @@ import PrimaryHeading from "../../ui/PrimaryHeading";
 import TripDurationFilter from "../../ui/TripDurationFilter";
 import Trips from "./Trips";
 import TripStatusBox from "./TripStatusBox";
-import { useTrips } from "./useTrips";
 import { countItemsByStatus } from "../../utils/utils";
+import { useGetItems } from "../../hooks/useGetItems";
+import { getAllItems } from "../../services/apiServices";
 
 function Trip() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
-  const { trips, isPending } = useTrips(tripsDurationFilter);
-
+  const { data: trips, isPending } = useGetItems(
+    `last-${tripsDurationFilter}-trips`,
+    () => getAllItems(`trips/last-${tripsDurationFilter}-trips`),
+  );
   if (isPending) return <div>Loading</div>;
   return (
     <div className="p-8">

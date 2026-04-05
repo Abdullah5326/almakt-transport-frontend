@@ -4,9 +4,7 @@ import { getAllTrips as getAllTripsApi } from "../../services/tripsApi";
 export function useTrips(durationType) {
   const { data: trips, isPending } = useQuery({
     queryKey: [`last-${durationType}-trips`],
-    queryFn: () => {
-      return getAllTripsApi(durationType);
-    },
+    queryFn: () => getAllTripsApi(durationType),
   });
 
   return { trips, isPending };

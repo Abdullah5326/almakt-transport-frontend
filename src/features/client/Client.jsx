@@ -1,9 +1,12 @@
+import { useGetItems } from "../../hooks/useGetItems";
+import { getAllItems } from "../../services/apiServices";
 import PrimaryHeading from "../../ui/PrimaryHeading";
 import ClientListItem from "./ClientListItem";
-import { useClients } from "./useClients";
 
 function Client() {
-  const { clients, isPending } = useClients();
+  const { data: clients, isPending } = useGetItems("clients", () =>
+    getAllItems("clients"),
+  );
   if (isPending) return <div>Loading...</div>;
   return (
     <div className="p-8">

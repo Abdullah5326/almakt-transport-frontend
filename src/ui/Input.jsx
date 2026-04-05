@@ -1,4 +1,4 @@
-function Input({ placeholder, type, name, register, required, labelName }) {
+function Input({ placeholder, type, name, register, labelName }) {
   return (
     <input
       type={type}

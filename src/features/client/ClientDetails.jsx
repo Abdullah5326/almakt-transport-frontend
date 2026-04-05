@@ -17,7 +17,6 @@ function ClientDetails() {
   const { client, isLoadingClient } = useClient();
 
   if (isLoadingClient) return <div>Loading...</div>;
-  console.log(client);
   return (
     <div className="p-8 ">
       {/* Back button */}

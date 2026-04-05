@@ -1,12 +1,16 @@
-import { useState } from "react";
 import { HiSearch } from "react-icons/hi";
 import { HiOutlineMoon, HiPlus } from "react-icons/hi2";
-import AddTripForm from "../features/trip/AddTripForm";
+import OperationsTripForm from "../features/trip/addTripForm/OperationsTripForm";
+import { useAddTrip } from "../features/trip/useAddTrip";
+import { useState } from "react";
+import AddMemberButtons from "./AddMemberButtons";
 
 function Navbar() {
-  const [showAddForm, setShowAddForm] = useState(false);
+  const [showAddTripForm, setShowAddTripForm] = useState(false);
+  const [showAddMemberContainer, setShowMemberContainer] = useState(false);
+  const { addTrip, isAddingTrip } = useAddTrip();
   return (
-    <nav className="bg-white py-3 pl-6 flex justify-between pr-8 border-b border-stone-300">
+    <nav className="bg-white py-3 pl-6 flex justify-between pr-8 border-b border-stone-300 ">
       <div className="relative">
         <input
           type="text"
@@ -24,18 +28,34 @@ function Navbar() {
             <HiOutlineMoon />
           </span>
           <button
-            className="cursor-pointer relative group"
+            className="cursor-pointer relative group bg-orange-500 text-white p-1 rounded-full"
             onClick={(e) => {
               e.preventDefault();
-              setShowAddForm(true);
+              setShowMemberContainer((show) => !show);
             }}
           >
-            <HiPlus />
-            <p className="bg-stone-50 hidden group-hover:block absolute text-nowrap -bottom-10 px-2 py-1 rounded-full text-stone-500">
-              Add Trip
-            </p>
+            <span>
+              <HiPlus className="h-5 w-5" />
+            </span>
+            {showAddMemberContainer && (
+              <AddMemberButtons
+                showAddTripForm={() => {
+                  setShowAddTripForm(true);
+                  setShowMemberContainer(false);
+                }}
+              />
+            )}
           </button>
-          {showAddForm && <AddTripForm setShowAddForm={setShowAddForm} />}
+          {showAddTripForm && (
+            <OperationsTripForm
+              operationFn={addTrip}
+              isPending={isAddingTrip}
+              name="Add New Trip"
+              description={"Fill in the details below to schedule a new trip."}
+              closeForm={() => setShowAddTripForm(false)}
+              submitBtnName="Add New Trip"
+            />
+          )}
         </div>
         <div className="flex gap-2">
           <img
