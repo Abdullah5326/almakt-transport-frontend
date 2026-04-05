@@ -1,5 +1,6 @@
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 import PrimaryHeading from "../../ui/PrimaryHeading";
 import ClientListItem from "./ClientListItem";
 
@@ -7,7 +8,7 @@ function Client() {
   const { data: clients, isPending } = useGetItems("clients", () =>
     getAllItems("clients"),
   );
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <LoadingSpinner />;
   return (
     <div className="p-8">
       <div className="px-8">

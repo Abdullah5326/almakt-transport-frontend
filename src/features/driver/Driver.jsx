@@ -2,12 +2,13 @@ import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
 import PrimaryHeading from "../../ui/PrimaryHeading";
 import DriverListItem from "./DriverListItem";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function Driver() {
   const { data: drivers, isPending } = useGetItems("drivers", () =>
     getAllItems("drivers"),
   );
-  if (isPending) return <div>Loading...</div>;
+  if (isPending) return <LoadingSpinner />;
   return (
     <div>
       <div className="p-8">
