@@ -19,7 +19,7 @@ function FormDriverClientSection({ errors, control }) {
   return (
     <div className="mt-4 flex flex-col gap-3">
       <SecondaryHeading>Driver & Client</SecondaryHeading>
-      <div className="flex justify-between gap-6">
+      <div className="flex flex-col md:flex-row justify-between gap-6">
         <FormInputBox>
           <Label labelName={"Driver"}>
             <HiOutlineUser className="text-orange-400" />

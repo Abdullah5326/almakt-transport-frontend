@@ -24,16 +24,18 @@ export default function DriverDetails() {
   );
   if (isLoadingDriver) return <LoadingSpinner />;
   return (
-    <div className="p-8 w-full h-full">
+    <div className="lg:p-8 p-2 w-full h-full">
       <BackButton path="Drivers" />
       {/* Driver Heading Name  */}
       <div className="mb-8">
         <PrimaryHeading>{driver?.name}</PrimaryHeading>
-        <p className="text-sm text-stone-500">{driver.vehicleName}</p>
+        <p className="text-sm text-stone-500">
+          {driver.vehicleFlatNo || "LHR 400"}({driver.vehicleName})
+        </p>
       </div>
 
       {/* Driver Statistics Boxes  */}
-      <div className="grid grid-cols-4 gap-10 mb-10">
+      <div className="grid lg:grid-cols-4 grid-cols-1 gap-3 lg:gap-10 mb-10">
         <DetailsStatisticsBox
           stateName="Total Trips"
           value={driver.trips.length}

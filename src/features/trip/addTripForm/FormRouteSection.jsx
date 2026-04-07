@@ -9,7 +9,7 @@ function FormRouteSection({ register, errors }) {
   return (
     <div className="mt-4 flex flex-col gap-3">
       <SecondaryHeading>Route Details</SecondaryHeading>
-      <div className="flex justify-between gap-6">
+      <div className="flex justify-between flex-col md:flex-row gap-6">
         <FormInputBox>
           <Label labelName={"Location (Origin)"}>
             <HiOutlineLocationMarker className="text-orange-400" />

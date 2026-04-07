@@ -18,7 +18,7 @@ function ClientDetails() {
 
   if (isLoadingClient) return <div>Loading...</div>;
   return (
-    <div className="p-8 ">
+    <div className="lg:p-8 p-2 ">
       {/* Back button */}
       <BackButton path="Clients" />
 
@@ -42,7 +42,7 @@ function ClientDetails() {
       </div>
 
       {/* Client Statistics  */}
-      <div className="grid grid-cols-3 gap-2  w-full mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2  w-full mb-8">
         <DetailsStatisticsBox
           stateName="Total Trips"
           value={client?.trips.length || "No Trips"}

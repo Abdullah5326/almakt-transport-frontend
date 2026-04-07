@@ -11,28 +11,33 @@ function DriverListItem({ driver, no }) {
 
   return (
     <li
-      className=" capitalize grid grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] hover:bg-stone-100 transition-all py-4 rounded-t-lg px-2 cursor-pointer"
+      className=" capitalize grid md:grid-cols-[5rem_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] hover:bg-stone-100 transition-all py-4 rounded-t-lg px-2 cursor-pointer text-sm lg:md"
       onClick={() => navigate(`/drivers/${driver._id}`)}
     >
-      <p>{no + 1}</p>
+      <p className="hidden md:block">{no + 1}</p>
       <p>{driver.name}</p>
       <p>
         <span>{driver.vehicleFlatNo || "LHR 400"}</span>
         <span className="text-sm text-stone-600"> ({driver.vehicleName})</span>
       </p>
-      <p>{new Date(driver.vehicleRenewalDate).toLocaleDateString()}</p>
-      <p>{new Date(driver.idCardExpiryDate).toLocaleDateString()}</p>
+      <p className="hidden md:block">
+        {new Date(driver.vehicleRenewalDate).toLocaleDateString()}
+      </p>
+      <p className="hidden md:block">
+        {new Date(driver.idCardExpiryDate).toLocaleDateString()}
+      </p>
       {/* <p
         className={`${driver.status.toLowerCase() === "active" ? "bg-green-500" : "bg-red-500"} px-2 text-white rounded-full justify-self-start flex items-center justify-center text-sm`}
       >
         {driver.status || "Active"}
       </p> */}
-      <StatusTag
-        value={driver.status === "active"}
-        options={{ successText: "Active", errorText: "unactive" }}
-      />
+      <p className="hidden md:block">{driver.mobileNo}</p>
       <div className="flex justify-between items-center">
-        <p>{driver.mobileNo}</p>
+        <StatusTag
+          value={driver.status === "active"}
+          options={{ successText: "Active", errorText: "unactive" }}
+        />
+
         <OperationMenu
           disabledValue={isDeletingDriver}
           itemId={driver._id}

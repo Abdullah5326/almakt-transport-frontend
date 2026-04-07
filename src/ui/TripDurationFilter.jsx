@@ -6,7 +6,7 @@ function TripDurationFilter() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
   const dispatch = useDispatch();
   return (
-    <div className="flex bg-white rounded-lg h-8 text-sm text-stone-500  ">
+    <div className="flex bg-white rounded-lg h-8 text-stone-500 text-xs ">
       <p className="flex gap-1 items-center  border-r border-stone-200 px-1">
         <span>
           <HiOutlineCalendar />

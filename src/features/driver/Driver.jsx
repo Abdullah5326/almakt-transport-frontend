@@ -11,20 +11,20 @@ function Driver() {
   if (isPending) return <LoadingSpinner />;
   return (
     <div>
-      <div className="p-8">
+      <div className="lg:p-8 p-2">
         <div className="mb-10">
           <PrimaryHeading>Drivers</PrimaryHeading>
           <p>Here is your business drivers</p>
         </div>
         <div className="rounded-2xl bg-white h-screen border-2 border-stone-200">
-          <div className="border-b-2 border-stone-200 grid grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] py-4 rounded-t-lg px-2">
-            <p>S.No</p>
+          <div className="border-b-2 border-stone-200 grid  md:grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] py-4 rounded-t-lg px-2">
+            <p className="hidden md:block">S.No</p>
             <p>Name</p>
-            <p>Vehicle Flat No</p>
-            <p>Vehicle Renewal Date</p>
-            <p>Id Card Expiry Date</p>
+            <p> Flat No</p>
+            <p className="hidden md:block">Vehicle Renewal Date</p>
+            <p className="hidden md:block">Id Card Expiry Date</p>
+            <p className="hidden md:block">Call No</p>
             <p>Status</p>
-            <p>Mobile No</p>
           </div>
           <ul className="divide-y divide-stone-100 overflow-y-auto h-110">
             {drivers.map((driver, i) => (

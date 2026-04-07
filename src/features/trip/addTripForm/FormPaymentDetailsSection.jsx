@@ -10,7 +10,7 @@ function FormPaymentDetailsSection({ register, errors, control }) {
   return (
     <div className="mt-4 flex flex-col gap-3">
       <SecondaryHeading>Payment Details</SecondaryHeading>
-      <div className="flex justify-between gap-6">
+      <div className="grid lg:grid-cols-4 grid-cols-1 gap-6">
         <FormInputBox>
           <Label labelName={"Trip Price"}>
             <HiOutlineCurrencyDollar className="text-orange-400 h-5 w-5" />

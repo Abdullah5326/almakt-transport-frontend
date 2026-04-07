@@ -4,7 +4,7 @@ function DashboardCard({ name, value, percentChange }) {
   return (
     <div className="p max-w-90 w-full py-4 px-4 bg-white shadow-lg rounded-lg   border border-stone-200">
       <p className="text-stone-400 text-xs lg-text-md mb-3">{name}</p>
-      <p className="lg:text-4xl md:text-2xl  font-semibold text-stone-900 mb-3">
+      <p className="lg:text-4xl text-1xl t font-bold text-stone-900 mb-3">
         {value}
       </p>
       {percentChange && (

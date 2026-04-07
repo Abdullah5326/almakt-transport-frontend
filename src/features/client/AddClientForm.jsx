@@ -28,7 +28,7 @@ function AddClientForm({ closeForm }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-8 w-100 ">
+    <form onSubmit={handleSubmit(onSubmit)} className="lg:p-8 p-4 w-80 lg:100">
       <FormHeader
         name="Add Client"
         closeForm={closeForm}

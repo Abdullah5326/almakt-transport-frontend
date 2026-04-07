@@ -8,7 +8,7 @@ function FormScheduleSection({ register, errors }) {
   return (
     <div className="mt-4 flex flex-col gap-3">
       <SecondaryHeading>Schedule</SecondaryHeading>
-      <div className="flex justify-between gap-6">
+      <div className="flex flex-col md:flex-row justify-between  gap-6">
         <FormInputBox>
           <Label labelName={"Trip Date"}>
             <HiOutlineCalendar className="text-orange-400" />

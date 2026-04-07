@@ -22,7 +22,7 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const { addTrip, isAddingTrip } = useAddTrip();
   return (
     <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
-      <div className="flex items-center justify-center w-32 mr-4 border-r border-stone-300 h-full ">
+      <div className="flex items-center justify-center w-14 mr-4 border-r border-stone-300 h-full ">
         <Link
           to="/"
           className={`uppercase   text-orange-500 hidden lg:flex text-1xl font-bold  items-center gap-2 `}
@@ -41,10 +41,10 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
           )}
         </span>
       </div>
-      <div className="relative">
+      <div className="relative max-w-80 w-full">
         <input
           type="text"
-          className="border w-40 border-stone-200 pl-2 lg:pl-8 p-1 focus:outline-orange-300 rounded-lg"
+          className="border  w-full  border-stone-200 pl-2 lg:pl-8 p-1 focus:outline-orange-300 rounded-lg"
           placeholder="Search a trip"
         />
         <span className="absolute top-[50%] transform -translate-y-[50%] right-1">

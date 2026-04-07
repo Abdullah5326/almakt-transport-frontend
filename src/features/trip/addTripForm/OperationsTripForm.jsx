@@ -50,7 +50,7 @@ function OperationTripForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-160 w-190  p-8 overflow-auto"
+      className="lg:h-160 lg:w-190 w-80 lg:p-8 p-3 h-100 overflow-auto"
     >
       <FormHeader closeForm={closeForm} name={name} description={description} />
 

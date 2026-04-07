@@ -15,13 +15,13 @@ function Trip() {
   );
   if (isPending) return <div>Loading</div>;
   return (
-    <div className="p-8">
+    <div className="lg:p-8 p-4">
       <PrimaryHeading>Trips</PrimaryHeading>
-      <div className="flex text-sm items-center mt-6 mb-13 justify-between pr-8">
-        <div className="flex gap-2">
-          <div className="bg-orange-400 text-white py-1 px-3 rounded-sm">
+      <div className="flex flex-col lg:flex-row gap-3 items-start text-sm lg:items-center mt-6 mb-13 justify-between lg:pr-8">
+        <div className="flex gap-2 text-xs">
+          <p className="bg-orange-400 text-white flex items-center px-3 rounded-sm">
             All Orders
-          </div>
+          </p>
           <TripStatusBox
             name="Completed"
             quantity={countItemsByStatus(trips)}
@@ -35,7 +35,7 @@ function Trip() {
           <TripDurationFilter />
         </div>
       </div>
-      <div className="pr-8">
+      <div className="lg:pr-8">
         <Trips trips={trips} />
       </div>
     </div>

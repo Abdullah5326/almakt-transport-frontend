@@ -21,8 +21,8 @@ function TripDetails() {
   if (isLoadingTrip) return <LoadingSpinner />;
   return (
     <div>
-      <div className="bg-white py-4 pl-12 pr-30 flex justify-between items-center">
-        <div className="flex items-center gap-6">
+      <div className=" py-4 px-2 lg:pl-12 lg:pr-30 flex justify-between items-center bg-white">
+        <div className="flex items-center gap-6 ">
           <button
             onClick={() => navigate(-1)}
             className="hover:bg-orange-500 p-3 rounded-lg hover:text-white"
@@ -30,8 +30,8 @@ function TripDetails() {
             <HiOutlineArrowLeft className="font-bold" />
           </button>
           <div>
-            <h2 className="text-2xl font-bold">{trip.name}</h2>
-            <p className="text-sm text-stone-500">
+            <h2 className="lg:text-2xl text-xl font-bold">{trip.name}</h2>
+            <p className="lg:text-sm text-xs text-stone-500">
               {trip.origin} to {trip.destination}
             </p>
           </div>
@@ -44,13 +44,13 @@ function TripDetails() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 px-55 py-20 gap-8">
-        <div className="bg-white w-110 p-6 rounded-xl border border-stone-200">
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:px-55 px-4 py-20 gap-8">
+        <div className="bg-white w-full lg:w-110 lg:p-6 p-3 rounded-xl border border-stone-200">
           <div className="mb-3 flex items-center gap-3">
             <span>
               <HiOutlineLocationMarker className="text-orange-400 h-5 w-5" />
             </span>
-            <h2 className="text-xl font-bold">Route</h2>
+            <h2 className="lg:text-xl text-lg  font-bold">Route</h2>
           </div>
           <div className=" flex gap-3 ">
             <div className="flex flex-col items-center justify-between py-2 ">
@@ -74,12 +74,12 @@ function TripDetails() {
             </div>
           </div>
         </div>
-        <div className="bg-white w-110 p-6 rounded-xl border border-stone-200">
+        <div className="bg-white w-full lg:w-110 p-6 rounded-xl border border-stone-200">
           <div className="flex gap-3 items-center mb-3">
             <span>
               <HiOutlineCalendar className="text-orange-400 h-5 w-5" />
             </span>
-            <h2 className="text-xl font-bold">Schedule</h2>
+            <h2 className="lg:text-1xl text-lg font-bold">Schedule</h2>
           </div>
 
           <div className="divide-y divide-stone-200">
@@ -105,7 +105,8 @@ function TripDetails() {
             </div>
           </div>
         </div>
-        <div className="bg-white w-110 p-6 rounded-xl border border-stone-200">
+        {/* Driver and client information fo trip  */}
+        <div className="bg-white lg:w-110 p-6 rounded-xl border border-stone-200">
           <div className="flex gap-3 items-center mb-3">
             <span>
               <HiOutlineUsers className="text-orange-400 h-5 w-5" />
@@ -136,7 +137,8 @@ function TripDetails() {
             </div>
           </div>
         </div>
-        <div className="bg-white w-110 p-6 rounded-xl border border-stone-200">
+        {/* Payment Section of trip  */}
+        <div className="bg-white lg:w-110 p-6 rounded-xl border border-stone-200">
           <div className="flex gap-3 items-center mb-3">
             <span>
               <HiOutlineCurrencyDollar className="text-orange-400 h-5 w-5" />

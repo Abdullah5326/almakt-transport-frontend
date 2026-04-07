@@ -45,7 +45,7 @@ function AddDriverForm({ closeForm }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="p-8 w-180 animate-showForm"
+      className="lg:p-8 lg:w-180 h-90 md:160 w-80 p-4 text-xs animate-showForm"
     >
       <FormHeader
         name="Add New Driver"
@@ -64,7 +64,7 @@ function AddDriverForm({ closeForm }) {
         />
         <EmptyFieldErrorMessage message={errors.name?.message} />
       </FormInputBox>
-      <div className="flex gap-12">
+      <div className="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Vehicle Name"></Label>
           <Input
@@ -88,7 +88,7 @@ function AddDriverForm({ closeForm }) {
           <EmptyFieldErrorMessage message={errors.vehicleFlatNo?.message} />
         </FormInputBox>
       </div>
-      <div className="flex gap-12">
+      <div className="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Mobile No"></Label>
           <Input
@@ -112,7 +112,7 @@ function AddDriverForm({ closeForm }) {
           <EmptyFieldErrorMessage message={errors.email?.message} />
         </FormInputBox>
       </div>
-      <div className="flex gap-12">
+      <div lassName="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Id Card Expiry Date"></Label>
           <DatePicker
