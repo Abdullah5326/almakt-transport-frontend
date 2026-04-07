@@ -14,11 +14,13 @@ import { useTrip } from "./useTrip";
 import { parseDate } from "../../utils/utils";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import StatusTag from "../../ui/StatusTag";
+import TripInvoiceDownloadBtn from "../../ui/TripInvoiceDownloadBtn";
 
 function TripDetails() {
   const { trip, isLoadingTrip } = useTrip();
   const navigate = useNavigate();
   if (isLoadingTrip) return <LoadingSpinner />;
+  console.log(trip);
   return (
     <div>
       <div className=" py-4 px-2 lg:pl-12 lg:pr-30 flex justify-between items-center bg-white">
@@ -36,11 +38,16 @@ function TripDetails() {
             </p>
           </div>
         </div>
-        <div>
-          <StatusTag
-            value={trip.isCompleted}
-            options={{ successText: "Completed", failText: "Pending" }}
-          />
+        <div className="flex flex-col gap-3">
+          <p>
+            <StatusTag
+              value={trip.isCompleted}
+              options={{ successText: "Completed", failText: "Pending" }}
+            />
+          </p>
+          <p className="bg-orange-500 text-white py-2 px-3 rounded-full">
+            <TripInvoiceDownloadBtn tripData={trip} />
+          </p>
         </div>
       </div>
 

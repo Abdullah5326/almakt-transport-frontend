@@ -17,8 +17,8 @@ function Trip() {
   return (
     <div className="lg:p-8 p-4">
       <PrimaryHeading>Trips</PrimaryHeading>
-      <div className="flex flex-col lg:flex-row gap-3 items-start text-sm lg:items-center mt-6 mb-13 justify-between lg:pr-8">
-        <div className="flex gap-2 text-xs">
+      <div className="flex flex-col lg:flex-row gap-3 items-start text-sm md:text-[16px] lg:items-center mt-6 mb-13 justify-between lg:pr-8">
+        <div className="flex gap-2 text-xs md:text-md font-semibold">
           <p className="bg-orange-400 text-white flex items-center px-3 rounded-sm">
             All Orders
           </p>

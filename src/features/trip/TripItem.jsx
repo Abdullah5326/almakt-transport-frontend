@@ -56,9 +56,9 @@ function TripItem({ trip }) {
         />
       </div>
       <p className="capitalize line-clamp-1">{trip.name}</p>
-      <p className="hidden">{trip.client.name}</p>
-      <p className="hidden">{trip.tripPrice}</p>
-      <div className="justify-self-start hidden ">
+      <p className="hidden lg:block">{trip.driver.name}</p>
+      <p className="hidden lg:block">{trip.tripPrice}</p>
+      <div className="justify-self-start hidden lg:block ">
         <StatusTag
           value={trip.paidTo === "owner"}
           options={{
@@ -68,7 +68,7 @@ function TripItem({ trip }) {
           }}
         />
       </div>
-      <p className="hidden">
+      <p className="hidden lg:block">
         {new Date(trip.startDate).toLocaleDateString() || "02-03-2026"}
       </p>
       <p className="">
@@ -79,15 +79,15 @@ function TripItem({ trip }) {
           className={`  text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
         >
           <span
-            className={`hidden ${trip.isCompleted ? "bg-green-500" : `bg-yellow-500`}`}
+            className={`hidden lg:block ${trip.isCompleted ? "bg-green-500" : `bg-yellow-500`} px-2 rounded-full`}
           >
             {trip.isCompleted ? "Completed" : "Pending"}
           </span>
           <span>
             {trip.isCompleted ? (
-              <HiCheck className="h-5 w-5 text-green-500" />
+              <HiCheck className="h-5 w-5 text-green-500 lg:hidden" />
             ) : (
-              <HiOutlineClock className="h-5 w-5 text-red-500" />
+              <HiOutlineClock className="h-5 w-5 text-red-500 lg:hidden" />
             )}
           </span>
         </p>

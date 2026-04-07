@@ -22,22 +22,23 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const { addTrip, isAddingTrip } = useAddTrip();
   return (
     <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
-      <div className="flex items-center justify-center w-14 mr-4 border-r border-stone-300 h-full ">
+      <div className="flex items-center justify-center w-14 lg:w-60 mr-4 border-r border-stone-300 h-full ">
         <Link
           to="/"
-          className={`uppercase   text-orange-500 hidden lg:flex text-1xl font-bold  items-center gap-2 `}
+          className={`uppercase   text-orange-500 hidden  lg:flex text-1xl font-bold  items-center gap-2 `}
         >
+          <span className={``}>Al-makt</span>
           <span className="text-2xl flex items-center ">🚛</span>
-          <span className={`${showSmallNav ? "hidden" : "block"}`}>
-            Al-makt
-          </span>
         </Link>
-        <span className="cursor-pointer ">
+        <span className="cursor-pointer lg:hidden">
           {!showSmallNav && (
             <HiMenu className="h-6 w-6" onClick={() => setShowSmallNav(true)} />
           )}
           {showSmallNav && (
-            <HiX className="h-6 w-6" onClick={() => setShowSmallNav(false)} />
+            <HiX
+              className="h-6 w-6 lg:hidden"
+              onClick={() => setShowSmallNav(false)}
+            />
           )}
         </span>
       </div>

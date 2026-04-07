@@ -11,7 +11,7 @@ function DriverListItem({ driver, no }) {
 
   return (
     <li
-      className=" capitalize grid md:grid-cols-[5rem_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] hover:bg-stone-100 transition-all py-4 rounded-t-lg px-2 cursor-pointer text-sm lg:md"
+      className=" capitalize grid md:grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] hover:bg-stone-100 transition-all py-4 rounded-t-lg px-2 cursor-pointer text-sm lg:text-[16px]"
       onClick={() => navigate(`/drivers/${driver._id}`)}
     >
       <p className="hidden md:block">{no + 1}</p>

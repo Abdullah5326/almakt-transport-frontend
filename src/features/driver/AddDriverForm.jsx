@@ -45,7 +45,7 @@ function AddDriverForm({ closeForm }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="lg:p-8 lg:w-180 h-90 md:160 w-80 p-4 text-xs animate-showForm"
+      className="lg:p-8 lg:w-180 h-90  md:h-160 w-80 p-4 text-xs md:text-md animate-showForm"
     >
       <FormHeader
         name="Add New Driver"

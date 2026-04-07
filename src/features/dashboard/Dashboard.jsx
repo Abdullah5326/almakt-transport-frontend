@@ -24,7 +24,7 @@ function Dashboard() {
 
   if (isPending || isLoadingTrips) return <LoadingSpinner />;
   return (
-    <div className="lg:px-6 px-2 overflow-auto relative">
+    <div className="lg:px-6 px-2  relative">
       <div className="mb-6 flex text-xs justify-between pt-4 lg:pr-30 lg:p-8 sm:gap-4 lg:gap-8">
         <div>
           <PrimaryHeading>Dashboard</PrimaryHeading>
@@ -33,7 +33,7 @@ function Dashboard() {
         <TripDurationFilter />
       </div>
 
-      <div className="flex flex-col items-center gap-2 mb-12">
+      <div className="flex flex-col lg:flex-row items-center gap-2 mb-12">
         <DashboardCard
           name="Total revenue"
           value={`$${calcTotalItemsSum(trips, "tripPrice")}`}
@@ -53,9 +53,6 @@ function Dashboard() {
       <div className="flex flex-col lg:flex-row gap-30 items-center mb-15">
         {/* <Chart /> */}
         <BarChartUI data={durationalTrips} />
-        {/* <PieChartUI
-          totalPaidAmount={calcTotalItemsSum(trips, "receivedAmount")}
-        /> */}
       </div>
       <div>
         <PrimaryHeading>Recent Trips</PrimaryHeading>

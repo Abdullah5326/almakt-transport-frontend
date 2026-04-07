@@ -11,20 +11,26 @@ import {
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
 
-function Sidebar({ showSmallNav = true }) {
+function Sidebar({ showSmallNav, setShowSmallNav }) {
   return (
     <aside
-      className={`${showSmallNav ? "w-13" : "w-80"} absolute border border-stone-200 bg-white h-screen z-33`}
+      className={`w-13 lg:w-70 absolute lg:relative border border-stone-200 bg-white h-screen z-3`}
+      onClick={() => setShowSmallNav(false)}
     >
       <div className=" w-full">
         <div className="pt-5">
           <p
-            className={`text-xs text-stone-400 uppercase mb-2 pl-4 ${showSmallNav ? "hidden" : "block"}`}
+            className={`text-xs text-stone-400 uppercase mb-2 pl-4 hidden lg:block`}
           >
             General
           </p>
           <div className="space-y-2">
-            <SidebarItem to="/" itemName="Home" showSmallNav={showSmallNav}>
+            <SidebarItem
+              to="/"
+              itemName="Home"
+              showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
+            >
               <span>
                 <HiOutlineHome className="h-5 w-5" />
               </span>
@@ -33,6 +39,7 @@ function Sidebar({ showSmallNav = true }) {
               to="/trips"
               itemName="Trips"
               showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineMap className="h-5 w-5" />
@@ -42,6 +49,7 @@ function Sidebar({ showSmallNav = true }) {
               to="/clients"
               itemName="Clients"
               showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineUsers className="h-5 w-5" />
@@ -51,29 +59,32 @@ function Sidebar({ showSmallNav = true }) {
               to="/drivers"
               itemName="Drivers"
               showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineTruck className="h-5 w-5" />
               </span>
             </SidebarItem>
-            <SidebarItem
-              to="/maintenance"
+            {/* <SidebarItem
+              to="/"
               itemName="Maintenance"
               showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineWrenchScrewdriver className="h-5 w-5" />
               </span>
             </SidebarItem>
             <SidebarItem
-              to="/finance"
+              to="/"
               itemName="Finance"
               showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineDocumentCurrencyDollar className="h-5 w-5" />
               </span>
-            </SidebarItem>
+            </SidebarItem> */}
           </div>
         </div>
       </div>
