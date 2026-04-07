@@ -1,5 +1,5 @@
-const LOCAL_URL = "http://localhost:3000/api/v1";
-const CLOUD_URL = "https://almakt-transport-backend.onrender.com/api/v1";
+const CLOUD_URL = "http://localhost:3000/api/v1";
+const LOCAL_URL = "https://almakt-transport-backend.onrender.com/api/v1";
 
 export async function getAllItems(endpoint) {
   const res = await fetch(`${LOCAL_URL}/${endpoint}`);
