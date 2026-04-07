@@ -1,5 +1,10 @@
-import { HiSearch } from "react-icons/hi";
-import { HiOutlineMoon, HiPlus } from "react-icons/hi2";
+import { HiMenu, HiSearch, HiX } from "react-icons/hi";
+import {
+  HiChevronLeft,
+  HiChevronRight,
+  HiOutlineMoon,
+  HiPlus,
+} from "react-icons/hi2";
 import OperationsTripForm from "../features/trip/addTripForm/OperationsTripForm";
 import { useAddTrip } from "../features/trip/useAddTrip";
 import { useState } from "react";
@@ -7,22 +12,42 @@ import AddMemberButtons from "./AddMemberButtons";
 import Modal from "./Modal";
 import AddClientForm from "../features/client/AddClientForm";
 import AddDriverForm from "../features/driver/AddDriverForm";
+import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
   const [showAddMemberContainer, setAddMemberContainer] = useState(false);
   const [showAddClientForm, setShowAddClientForm] = useState(false);
   const [showAddDriverForm, setShowAddDriverForm] = useState(false);
   const { addTrip, isAddingTrip } = useAddTrip();
   return (
-    <nav className="bg-white h-19  items-center pl-6 flex justify-between pr-8 border-b border-stone-300 ">
+    <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
+      <div className="flex items-center justify-center w-32 mr-4 border-r border-stone-300 h-full ">
+        <Link
+          to="/"
+          className={`uppercase   text-orange-500 hidden lg:flex text-1xl font-bold  items-center gap-2 `}
+        >
+          <span className="text-2xl flex items-center ">🚛</span>
+          <span className={`${showSmallNav ? "hidden" : "block"}`}>
+            Al-makt
+          </span>
+        </Link>
+        <span className="cursor-pointer ">
+          {!showSmallNav && (
+            <HiMenu className="h-6 w-6" onClick={() => setShowSmallNav(true)} />
+          )}
+          {showSmallNav && (
+            <HiX className="h-6 w-6" onClick={() => setShowSmallNav(false)} />
+          )}
+        </span>
+      </div>
       <div className="relative">
         <input
           type="text"
-          className="border border-stone-200 pl-8 p-1 focus:outline-orange-300 rounded-lg"
+          className="border w-40 border-stone-200 pl-2 lg:pl-8 p-1 focus:outline-orange-300 rounded-lg"
           placeholder="Search a trip"
         />
-        <span className="absolute top-[50%] transform -translate-y-[50%] left-3">
+        <span className="absolute top-[50%] transform -translate-y-[50%] right-1">
           <HiSearch className="text-stone-400" />
         </span>
       </div>

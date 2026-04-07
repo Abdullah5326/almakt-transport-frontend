@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import {
-  HiChevronLeft,
-  HiChevronRight,
-  HiOutlineDocument,
   HiOutlineHome,
   HiOutlineMap,
   HiOutlineTruck,
@@ -13,41 +10,13 @@ import {
   HiOutlineDocumentCurrencyDollar,
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
-import { useState } from "react";
 
-function Sidebar() {
-  const [showSmallNav, setShowSmallNav] = useState(true);
+function Sidebar({ showSmallNav = true }) {
   return (
     <aside
-      className={`${showSmallNav ? "w-15" : "w-80"}  border border-stone-200 bg-white h-screen relative`}
+      className={`${showSmallNav ? "w-13" : "w-80"} absolute border border-stone-200 bg-white h-screen z-33`}
     >
       <div className=" w-full">
-        <div className="flex h-[4.25rem] items-center justify-between  border-b border-stone-300 px-4 ">
-          <Link
-            to="/"
-            className={`uppercase   text-orange-500 text-1xl font-bold flex items-center gap-2 ${showSmallNav ? "hidden" : "block"}`}
-          >
-            <span className="text-2xl flex items-center ">🚛</span>
-            <span className={`${showSmallNav ? "hidden" : "block"}`}>
-              Al-makt
-            </span>
-          </Link>
-          <span className="cursor-pointer">
-            {!showSmallNav && (
-              <HiChevronLeft
-                className="h-6 w-6"
-                onClick={() => setShowSmallNav(true)}
-              />
-            )}
-            {showSmallNav && (
-              <HiChevronRight
-                className="h-6 w-6"
-                onClick={() => setShowSmallNav(false)}
-              />
-            )}
-          </span>
-        </div>
-
         <div className="pt-5">
           <p
             className={`text-xs text-stone-400 uppercase mb-2 pl-4 ${showSmallNav ? "hidden" : "block"}`}

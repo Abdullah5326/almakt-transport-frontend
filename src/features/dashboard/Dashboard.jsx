@@ -53,9 +53,9 @@ function Dashboard() {
       <div className="flex flex-col lg:flex-row gap-30 items-center mb-15">
         {/* <Chart /> */}
         <BarChartUI data={durationalTrips} />
-        <PieChartUI
+        {/* <PieChartUI
           totalPaidAmount={calcTotalItemsSum(trips, "receivedAmount")}
-        />
+        /> */}
       </div>
       <div>
         <PrimaryHeading>Recent Trips</PrimaryHeading>
