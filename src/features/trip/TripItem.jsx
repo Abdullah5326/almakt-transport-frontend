@@ -55,7 +55,7 @@ function TripItem({ trip }) {
         />
       </div>
       <p className="capitalize">{trip.name}</p>
-      <p>{trip.client.name || "abdullah"}</p>
+      <p>{trip.client.name}</p>
       <p>{trip.tripPrice}</p>
       <div className="justify-self-start">
         <StatusTag

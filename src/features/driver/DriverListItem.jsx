@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import OperationMenu from "./../../ui/OperationMenu";
 import { useDeleteItem } from "./../../hooks/useDeleteItem";
 import { deleteItem } from "../../services/apiServices";
+import StatusTag from "../../ui/StatusTag";
 
 function DriverListItem({ driver, no }) {
   const navigate = useNavigate();
   const { deleteItem: deleteDriver, isDeletingItem: isDeletingDriver } =
-    useDeleteItem(deleteItem, "drivers");
+    useDeleteItem(deleteItem, "drivers", "drivers");
 
   return (
     <li
@@ -21,11 +22,15 @@ function DriverListItem({ driver, no }) {
       </p>
       <p>{new Date(driver.vehicleRenewalDate).toLocaleDateString()}</p>
       <p>{new Date(driver.idCardExpiryDate).toLocaleDateString()}</p>
-      <p
+      {/* <p
         className={`${driver.status.toLowerCase() === "active" ? "bg-green-500" : "bg-red-500"} px-2 text-white rounded-full justify-self-start flex items-center justify-center text-sm`}
       >
         {driver.status || "Active"}
-      </p>
+      </p> */}
+      <StatusTag
+        value={driver.status === "active"}
+        options={{ successText: "Active", errorText: "unactive" }}
+      />
       <div className="flex justify-between items-center">
         <p>{driver.mobileNo}</p>
         <OperationMenu

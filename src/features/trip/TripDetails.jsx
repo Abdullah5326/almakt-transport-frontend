@@ -19,7 +19,6 @@ function TripDetails() {
   const { trip, isLoadingTrip } = useTrip();
   const navigate = useNavigate();
   if (isLoadingTrip) return <LoadingSpinner />;
-  console.log(trip);
   return (
     <div>
       <div className="bg-white py-4 pl-12 pr-30 flex justify-between items-center">

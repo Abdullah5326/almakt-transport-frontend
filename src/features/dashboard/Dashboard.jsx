@@ -50,14 +50,17 @@ function Dashboard() {
           percentChange={5}
         />
       </div>
-      <div className="flex gap-30 items-center">
+      <div className="flex gap-30 items-center mb-15">
         {/* <Chart /> */}
         <BarChartUI data={durationalTrips} />
         <PieChartUI
           totalPaidAmount={calcTotalItemsSum(trips, "receivedAmount")}
         />
       </div>
-      <Trips trips={trips} />
+      <div>
+        <PrimaryHeading>Recent Trips</PrimaryHeading>
+        <Trips trips={trips} />
+      </div>
     </div>
   );
 }

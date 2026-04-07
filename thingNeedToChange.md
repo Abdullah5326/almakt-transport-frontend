@@ -18,3 +18,4 @@
 # Personal Suggestions
 
 In deleting of the app don't delete the trip, drive or client because it break the relations instead deactive it.
+Add the spinner in the submit button section of the adding form

@@ -4,10 +4,15 @@ import OperationsTripForm from "../features/trip/addTripForm/OperationsTripForm"
 import { useAddTrip } from "../features/trip/useAddTrip";
 import { useState } from "react";
 import AddMemberButtons from "./AddMemberButtons";
+import Modal from "./Modal";
+import AddClientForm from "../features/client/AddClientForm";
+import AddDriverForm from "../features/driver/AddDriverForm";
 
 function Navbar() {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
-  const [showAddMemberContainer, setShowMemberContainer] = useState(false);
+  const [showAddMemberContainer, setAddMemberContainer] = useState(false);
+  const [showAddClientForm, setShowAddClientForm] = useState(false);
+  const [showAddDriverForm, setShowAddDriverForm] = useState(false);
   const { addTrip, isAddingTrip } = useAddTrip();
   return (
     <nav className="bg-white py-3 pl-6 flex justify-between pr-8 border-b border-stone-300 ">
@@ -23,38 +28,62 @@ function Navbar() {
       </div>
 
       <div className="flex gap-4 items-center divide-x-2 divide-stone-200">
-        <div className="flex gap-4 px-3 py-1">
+        <div className="flex gap-4 px-3 py-1 items-center">
           <span className="cursor-pointer">
             <HiOutlineMoon />
           </span>
-          <button
-            className="cursor-pointer relative group bg-orange-500 text-white p-1 rounded-full"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowMemberContainer((show) => !show);
-            }}
-          >
-            <span>
-              <HiPlus className="h-5 w-5" />
-            </span>
+          <div className="relative">
+            <button
+              className="cursor-pointer relative group bg-orange-500 text-white p-1 rounded-full"
+              onClick={(e) => {
+                e.preventDefault();
+                setAddMemberContainer((show) => !show);
+              }}
+            >
+              <span>
+                <HiPlus className="h-5 w-5" />
+              </span>
+            </button>
             {showAddMemberContainer && (
               <AddMemberButtons
                 showAddTripForm={() => {
                   setShowAddTripForm(true);
-                  setShowMemberContainer(false);
+                  setAddMemberContainer((show) => !show);
+                }}
+                showAddClientForm={() => {
+                  setShowAddClientForm(true);
+                  setAddMemberContainer(false);
+                }}
+                showAddDriverForm={() => {
+                  setShowAddDriverForm(true);
+                  setAddMemberContainer(false);
                 }}
               />
             )}
-          </button>
+          </div>
           {showAddTripForm && (
-            <OperationsTripForm
-              operationFn={addTrip}
-              isPending={isAddingTrip}
-              name="Add New Trip"
-              description={"Fill in the details below to schedule a new trip."}
-              closeForm={() => setShowAddTripForm(false)}
-              submitBtnName="Add New Trip"
-            />
+            <Modal closeForm={() => setShowAddTripForm(false)}>
+              <OperationsTripForm
+                operationFn={addTrip}
+                isPending={isAddingTrip}
+                name="Add New Trip"
+                description={
+                  "Fill in the details below to schedule a new trip."
+                }
+                closeForm={() => setShowAddTripForm(false)}
+                submitBtnName="Add New Trip"
+              />
+            </Modal>
+          )}
+          {showAddClientForm && (
+            <Modal closeForm={() => setShowAddClientForm(false)}>
+              <AddClientForm closeForm={() => setShowAddClientForm(false)} />
+            </Modal>
+          )}
+          {showAddDriverForm && (
+            <Modal closeForm={() => setShowAddDriverForm(false)}>
+              <AddDriverForm closeForm={() => setShowAddDriverForm(false)} />
+            </Modal>
           )}
         </div>
         <div className="flex gap-2">

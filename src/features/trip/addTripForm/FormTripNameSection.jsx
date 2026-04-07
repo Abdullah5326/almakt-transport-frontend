@@ -17,7 +17,6 @@ function FormTripNameSection({ register, errors }) {
         type="text"
         name="name"
         register={register}
-        required={"required"}
         labelName="trip name"
       />
       {errors?.name && <EmptyFieldErrorMessage message={errors.name.message} />}

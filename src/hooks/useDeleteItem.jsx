@@ -12,7 +12,7 @@ export function useDeleteItem(deleteApiFn, queryKey, endpointPath) {
       queryClient.invalidateQueries({
         queryKey: [queryKey],
       });
-      if (clientId) queryClient.invalidateQueries(["clients", clientId]);
+      if (clientId) queryClient.invalidateQueries(["clients"]);
       toast.success("Successfully deleted the item");
     },
 

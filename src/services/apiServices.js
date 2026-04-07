@@ -10,6 +10,28 @@ export async function getAllItems(endpoint) {
   return data.data.data;
 }
 
+export async function addItem(endpoint, item) {
+  const res = await fetch(`${CLOUD_URL}/${endpoint}`, {
+    method: "POST",
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await res.json();
+
+  if (!res.ok)
+    throw new Error(
+      "There is an error in adding " +
+        endpoint +
+        ".Please try again " +
+        "Server Error: " +
+        data.message,
+    );
+
+  return data;
+}
+
 export async function getItem(endpoint, id) {
   const res = await fetch(`${CLOUD_URL}/${endpoint}/${id}`);
 
@@ -37,15 +59,10 @@ export async function updateItem(updateData) {
 }
 
 export async function deleteItem(resourceName, id) {
-  console.log(resourceName, id);
   const res = await fetch(`${CLOUD_URL}/${resourceName}/${id}`, {
     method: "DELETE",
   });
-
-  if (!res.ok)
-    throw new Error(
-      `There is an error in deleting Item in resource(${resourceName})`,
-    );
+  if (!res.ok) throw new Error("There is an error in deleting item");
 
   return id;
 }
