@@ -18,7 +18,7 @@ export default function CustomActiveShapePieChart({
   defaultIndex,
 }) {
   return (
-    <ResponsiveContainer width="100%" height={240}>
+    <ResponsiveContainer width="100%" height={300}>
       <PieChart>
         <Pie
           data={data}

@@ -7,6 +7,7 @@ import { useDeleteItem } from "../../hooks/useDeleteItem";
 import { deleteItem } from "../../services/apiServices";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { HiCheck, HiOutlineClock } from "react-icons/hi2";
 import StatusTag from "../../ui/StatusTag";
 
 function TripItem({ trip }) {
@@ -23,7 +24,7 @@ function TripItem({ trip }) {
     useDeleteItem(deleteItem, tripsQueryKey, "trips");
   return (
     <li
-      className="grid grid-cols-[5rem_1.5fr_1.5fr_1fr_1fr_1fr_1fr_1.5fr] hover:bg-stone-200 transition-all h-16 items-center rounded-t-lg pl-2 cursor-pointer"
+      className="grid lg:grid-cols-[5rem_1.5fr_1.5fr_1fr_1fr_1fr_1fr_1.5fr] grid-cols-[2rem_1.2fr_1fr_1.2fr] hover:bg-stone-200 transition-all h-16 items-center rounded-t-lg pl-2 cursor-pointer"
       onClick={() => navigate(`/trips/${trip._id}`)}
     >
       <div>
@@ -54,10 +55,10 @@ function TripItem({ trip }) {
           disabled={isUpdatingTrip}
         />
       </div>
-      <p className="capitalize">{trip.name}</p>
-      <p>{trip.client.name}</p>
-      <p>{trip.tripPrice}</p>
-      <div className="justify-self-start">
+      <p className="capitalize line-clamp-1">{trip.name}</p>
+      <p className="hidden">{trip.client.name}</p>
+      <p className="hidden">{trip.tripPrice}</p>
+      <div className="justify-self-start hidden ">
         <StatusTag
           value={trip.paidTo === "owner"}
           options={{
@@ -67,13 +68,29 @@ function TripItem({ trip }) {
           }}
         />
       </div>
-      <p>{new Date(trip.startDate).toLocaleDateString() || "02-03-2026"}</p>
-      <p>{new Date(trip.deadlineDate).toLocaleDateString() || "02-03-2026"}</p>
-      <div className="flex justify-between items-center pl-2 ">
-        <StatusTag
-          value={trip.isCompleted}
-          options={{ successText: "Completed", failText: "Pending" }}
-        />
+      <p className="hidden">
+        {new Date(trip.startDate).toLocaleDateString() || "02-03-2026"}
+      </p>
+      <p className="">
+        {new Date(trip.deadlineDate).toLocaleDateString() || "02-03-2026"}
+      </p>
+      <div className="flex justify-between items-center  pl-2 ">
+        <p
+          className={`  text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
+        >
+          <span
+            className={`hidden ${trip.isCompleted ? "bg-green-500" : `bg-yellow-500`}`}
+          >
+            {trip.isCompleted ? "Completed" : "Pending"}
+          </span>
+          <span>
+            {trip.isCompleted ? (
+              <HiCheck className="h-5 w-5 text-green-500" />
+            ) : (
+              <HiOutlineClock className="h-5 w-5 text-red-500" />
+            )}
+          </span>
+        </p>
         <OperationMenu
           disabledValue={isDeletingTrip}
           itemId={trip._id}

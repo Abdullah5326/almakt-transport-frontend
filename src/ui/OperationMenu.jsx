@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import Modal from "./Modal";
 
 function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
-  console.log(item);
   const [showUpdateTripForm, setShowUpdateTripForm] = useState(false);
   const { tripsDurationFilter } = useSelector((state) => state.trip);
   const { updateItem: updateTrip, isPending: isUpdatingTrip } = useUpdateItem(
@@ -27,7 +26,7 @@ function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
     setShowUpdateTripForm(true);
   }
   return (
-    <div className="cursor-pointer flex gap-2 items-center pr-4">
+    <div className="cursor-pointer flex gap-2 items-center lg:pr-4">
       <ButtonSmall disabledValue={disabledValue} onClick={handleDeleteBtn}>
         <HiOutlineTrash className="w-5 h-5 text-stone-500" />
       </ButtonSmall>

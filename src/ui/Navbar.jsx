@@ -15,7 +15,7 @@ function Navbar() {
   const [showAddDriverForm, setShowAddDriverForm] = useState(false);
   const { addTrip, isAddingTrip } = useAddTrip();
   return (
-    <nav className="bg-white py-3 pl-6 flex justify-between pr-8 border-b border-stone-300 ">
+    <nav className="bg-white h-19  items-center pl-6 flex justify-between pr-8 border-b border-stone-300 ">
       <div className="relative">
         <input
           type="text"
@@ -28,7 +28,7 @@ function Navbar() {
       </div>
 
       <div className="flex gap-4 items-center divide-x-2 divide-stone-200">
-        <div className="flex gap-4 px-3 py-1 items-center">
+        <div className="flex gap-4 px-3 items-center">
           <span className="cursor-pointer">
             <HiOutlineMoon />
           </span>
@@ -85,17 +85,6 @@ function Navbar() {
               <AddDriverForm closeForm={() => setShowAddDriverForm(false)} />
             </Modal>
           )}
-        </div>
-        <div className="flex gap-2">
-          <img
-            src="images/default.jpg"
-            alt="user image"
-            className="rounded-full h-9 "
-          />
-          <p className="flex flex-col">
-            <span className="text-sm">Atif Khan</span>
-            <span className="text-xs text-stone-400">Admin</span>
-          </p>
         </div>
       </div>
     </nav>
