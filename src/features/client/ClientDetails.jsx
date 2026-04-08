@@ -12,11 +12,13 @@ import { countItemsByStatus } from "../../utils/utils";
 import DetailsStatisticsBox from "../../ui/DetailsStatisticsBox";
 import { PiPath } from "react-icons/pi";
 import BackButton from "../../ui/BackButton";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function ClientDetails() {
   const { client, isLoadingClient } = useClient();
 
-  if (isLoadingClient) return <div>Loading...</div>;
+  if (isLoadingClient) return <LoadingSpinner />;
+  console.log(client.trips);
   return (
     <div className="lg:p-8 p-2 ">
       {/* Back button */}

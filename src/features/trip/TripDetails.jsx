@@ -45,7 +45,7 @@ function TripDetails() {
               options={{ successText: "Completed", failText: "Pending" }}
             />
           </p>
-          <p className="bg-orange-500 text-white py-2 px-3 rounded-full">
+          <p className="bg-orange-500 text-white text-xs py-1 px-3 rounded-full">
             <TripInvoiceDownloadBtn tripData={trip} />
           </p>
         </div>

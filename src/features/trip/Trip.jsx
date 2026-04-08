@@ -6,6 +6,7 @@ import TripStatusBox from "./TripStatusBox";
 import { countItemsByStatus } from "../../utils/utils";
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
+import LoadingSpinner from "../../ui/LoadingSpinner";
 
 function Trip() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
@@ -13,7 +14,7 @@ function Trip() {
     `last-${tripsDurationFilter}-trips`,
     () => getAllItems(`trips/last-${tripsDurationFilter}-trips`),
   );
-  if (isPending) return <div>Loading</div>;
+  if (isPending) return <LoadingSpinner />;
   return (
     <div className="lg:p-8 p-4">
       <PrimaryHeading>Trips</PrimaryHeading>

@@ -34,14 +34,16 @@ function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
         <HiOutlinePencil className="hover:text-yellow-900" />
       </ButtonSmall>
       {showUpdateTripForm && (
-        <Modal>
+        <Modal closeForm={() => setShowUpdateTripForm(false)}>
           <OperationTripForm
             defaultValues={{
               ...item,
-              startDate: new Date(item.startDate).toISOString().split("T")[0],
-              deadlineDate: new Date(item.deadlineDate)
-                .toISOString()
-                .split("T")[0],
+              startDate:
+                new Date(item.startDate)?.toISOString().split("T")[0] ||
+                "2027-04-25",
+              deadlineDate:
+                new Date(item.deadlineDate)?.toISOString().split("T")[0] ||
+                "2027-04-25",
               client: item.client._id,
               driver: item.driver._id,
             }}
