@@ -1,19 +1,12 @@
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import ButtonSmall from "./ButtonSmall";
-import OperationTripForm from "../features/trip/addTripForm/OperationsTripForm";
-import { useState } from "react";
-import { useUpdateItem } from "../hooks/useUpdateItem";
-import { updateItem } from "../services/apiServices";
-import { useSelector } from "react-redux";
-import Modal from "./Modal";
 
-function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
-  const [showUpdateTripForm, setShowUpdateTripForm] = useState(false);
-  const { tripsDurationFilter } = useSelector((state) => state.trip);
-  const { updateItem: updateTrip, isPending: isUpdatingTrip } = useUpdateItem(
-    `last-${tripsDurationFilter}-trips`,
-    updateItem,
-  );
+function OperationMenu({
+  disabledValue,
+  operationDeleteFn,
+  itemId,
+  toggleEditForm,
+}) {
   function handleDeleteBtn(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -23,7 +16,7 @@ function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
   function handleEditBtn(e) {
     e.stopPropagation();
     e.preventDefault();
-    setShowUpdateTripForm(true);
+    toggleEditForm(true);
   }
   return (
     <div className="cursor-pointer flex gap-1 md:gap-2 items-center lg:pr-4">
@@ -33,29 +26,6 @@ function OperationMenu({ disabledValue, operationDeleteFn, itemId, item }) {
       <ButtonSmall disabledValue={disabledValue} onClick={handleEditBtn}>
         <HiOutlinePencil className="hover:text-yellow-900" />
       </ButtonSmall>
-      {showUpdateTripForm && (
-        <Modal closeForm={() => setShowUpdateTripForm(false)}>
-          <OperationTripForm
-            defaultValues={{
-              ...item,
-              startDate:
-                new Date(item.startDate)?.toISOString().split("T")[0] ||
-                "2027-04-25",
-              deadlineDate:
-                new Date(item.deadlineDate)?.toISOString().split("T")[0] ||
-                "2027-04-25",
-              client: item.client._id,
-              driver: item.driver._id,
-            }}
-            name="Update The Trip"
-            isPending={isUpdatingTrip}
-            description="Update the fields that you want to change"
-            closeForm={() => setShowUpdateTripForm(false)}
-            submitBtnName="Update Trip"
-            operationFn={updateTrip}
-          />
-        </Modal>
-      )}
     </div>
   );
 }

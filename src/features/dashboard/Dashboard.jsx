@@ -10,6 +10,7 @@ import { getAllItems, getItem } from "../../services/apiServices";
 import PieChartUI from "../../ui/PieChartUI";
 import BarChartUI from "../../ui/BarChartUI";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { formatCurrency } from "../../utils/utils";
 
 function Dashboard() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
@@ -36,7 +37,7 @@ function Dashboard() {
       <div className="flex flex-col lg:flex-row items-center gap-2 mb-12">
         <DashboardCard
           name="Total revenue"
-          value={`$${calcTotalItemsSum(trips, "tripPrice")}`}
+          value={`${formatCurrency(calcTotalItemsSum(trips, "tripPrice"))}`}
           percentChange={20}
         />
         <DashboardCard
@@ -46,8 +47,9 @@ function Dashboard() {
         />
         <DashboardCard
           name="Total Paid Amount"
-          value={`$${calcTotalItemsSum(trips, "receivedAmount")}`}
+          value={`${formatCurrency(calcTotalItemsSum(trips, "receivedAmount"))}`}
           percentChange={5}
+          l
         />
       </div>
       <div className="flex flex-col lg:flex-row gap-30 items-center mb-15">

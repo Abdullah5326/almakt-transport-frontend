@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useUpdateItem } from "../../hooks/useUpdateItem";
 import { useSelector } from "react-redux";
-import { updateTrip as updateTripApi } from "../../services/tripsApi";
 import OperationMenu from "../../ui/OperationMenu";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
 import { deleteItem } from "../../services/apiServices";
@@ -9,8 +8,12 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { HiCheck, HiOutlineClock } from "react-icons/hi2";
 import StatusTag from "../../ui/StatusTag";
+import OperationTripForm from "./addTripForm/OperationsTripForm";
+import { updateItem as updateTripApi } from "../../services/apiServices";
+import Modal from "./../../ui/Modal";
 
 function TripItem({ trip }) {
+  const [showUpdateTripForm, setShowUpdateTripForm] = useState(false);
   const [tripCompleted, setTripCompleted] = useState(trip.isCompleted);
   const { tripsDurationFilter } = useSelector((state) => state.trip);
   const tripsQueryKey = `last-${tripsDurationFilter}-trips`;
@@ -19,6 +22,7 @@ function TripItem({ trip }) {
   const { updateItem: updateTrip, isPending: isUpdatingTrip } = useUpdateItem(
     tripsQueryKey,
     updateTripApi,
+    "trips",
   );
   const { deleteItem: deleteTrip, isDeletingItem: isDeletingTrip } =
     useDeleteItem(deleteItem, tripsQueryKey, "trips");
@@ -95,8 +99,33 @@ function TripItem({ trip }) {
           disabledValue={isDeletingTrip}
           itemId={trip._id}
           operationDeleteFn={deleteTrip}
+          operationUpdateFn={updateTrip}
           item={trip}
+          toggleEditForm={setShowUpdateTripForm}
         />
+        {showUpdateTripForm && (
+          <Modal closeForm={() => setShowUpdateTripForm(false)}>
+            <OperationTripForm
+              defaultValues={{
+                ...trip,
+                startDate:
+                  new Date(trip.startDate)?.toISOString().split("T")[0] ||
+                  "2027-04-25",
+                deadlineDate:
+                  new Date(trip.deadlineDate)?.toISOString().split("T")[0] ||
+                  "2027-04-25",
+                client: trip.client._id,
+                driver: trip.driver._id,
+              }}
+              name="Update The Trip"
+              isPending={isUpdatingTrip}
+              description="Update the fields that you want to change"
+              closeForm={() => setShowUpdateTripForm(false)}
+              submitBtnName="Update Trip"
+              operationFn={updateTrip}
+            />
+          </Modal>
+        )}
       </div>
     </li>
   );

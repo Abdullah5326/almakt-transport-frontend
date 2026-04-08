@@ -2,13 +2,21 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import OperationMenu from "../../ui/OperationMenu";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
-import { deleteItem } from "../../services/apiServices";
+import { deleteItem, updateItem } from "../../services/apiServices";
 import StatusTag from "../../ui/StatusTag";
+import { useState } from "react";
+import AddClientForm from "./AddClientForm";
+import Modal from "../../ui/Modal";
+import { useUpdateItem } from "../../hooks/useUpdateItem";
 
 function ClientListItem({ client, no }) {
+  const queryKey = "clients";
+  const [showUpdateClientForm, setShowUpdateClientForm] = useState(false);
   const navigate = useNavigate();
   const { deleteItem: deleteClient, isDeletingItem: isDeletingClient } =
-    useDeleteItem(deleteItem, "clients", "clients");
+    useDeleteItem(deleteItem, queryKey, "clients");
+  const { updateItem: updateClient, isPending: isLoadingClient } =
+    useUpdateItem(queryKey, updateItem, "clients");
   return (
     <li
       className="grid grid-cols-[1.5fr_1fr_1fr] md:grid-cols-[5rem_1fr_1fr_1fr_1fr] py-4 hover:bg-stone-100 rounded-t-lg px-1 cursor-pointer"
@@ -34,7 +42,19 @@ function ClientListItem({ client, no }) {
           disabledValue={isDeletingClient}
           itemId={client._id}
           operationDeleteFn={deleteClient}
+          toggleEditForm={setShowUpdateClientForm}
         />
+        {showUpdateClientForm && (
+          <Modal closeForm={() => setShowUpdateClientForm(false)}>
+            <AddClientForm
+              closeForm={() => setShowUpdateClientForm(false)}
+              defaultValues={client}
+              btnText="Update Client"
+              operationFn={updateClient}
+              isLoading={isLoadingClient}
+            />
+          </Modal>
+        )}
       </div>
     </li>
   );

@@ -1,13 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import OperationMenu from "./../../ui/OperationMenu";
 import { useDeleteItem } from "./../../hooks/useDeleteItem";
-import { deleteItem } from "../../services/apiServices";
+import { deleteItem, updateItem } from "../../services/apiServices";
 import StatusTag from "../../ui/StatusTag";
+import { useUpdateItem } from "../../hooks/useUpdateItem";
+import { useState } from "react";
+import Modal from "../../ui/Modal";
+import AddDriverForm from "./AddDriverForm";
 
 function DriverListItem({ driver, no }) {
+  const queryKey = "drivers";
   const navigate = useNavigate();
+  const [showUpdateDriverForm, setShowUpdateDriverForm] = useState(false);
   const { deleteItem: deleteDriver, isDeletingItem: isDeletingDriver } =
-    useDeleteItem(deleteItem, "drivers", "drivers");
+    useDeleteItem(deleteItem, queryKey, "drivers");
+  const { updateItem: updateDriver, isPending: isUpdatingDriver } =
+    useUpdateItem(queryKey, updateItem, "drivers");
 
   return (
     <li
@@ -42,7 +50,29 @@ function DriverListItem({ driver, no }) {
           disabledValue={isDeletingDriver}
           itemId={driver._id}
           operationDeleteFn={deleteDriver}
+          toggleEditForm={setShowUpdateDriverForm}
         />
+        {showUpdateDriverForm && (
+          <Modal closeForm={() => setShowUpdateDriverForm(false)}>
+            <AddDriverForm
+              defaultValues={{
+                ...driver,
+                idCardExpiryDate: new Date(driver.idCardExpiryDate)
+                  ?.toISOString()
+                  .split("T")[0],
+                vehicleRenewalDate: new Date(driver.vehicleRenewalDate)
+                  ?.toISOString()
+                  .split("T")[0],
+              }}
+              name="Update The Trip"
+              isPending={isUpdatingDriver}
+              description="Update the fields that you want to change"
+              closeForm={() => setShowUpdateDriverForm(false)}
+              btnText="Update Driver"
+              operationFn={updateDriver}
+            />
+          </Modal>
+        )}
       </div>
     </li>
   );

@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
-export function useUpdateItem(queryKey, mutationFn) {
+export function useUpdateItem(queryKey, mutationFn, endpoint) {
   const queryClient = useQueryClient();
   const { clientId } = useParams();
   const { driverId } = useParams();
 
   const { mutate: updateItem, isPending } = useMutation({
-    mutationFn,
+    mutationFn: (data) => mutationFn(data, endpoint),
     onSuccess: () => {
       toast.success("The item is updated successfully.");
       queryClient.invalidateQueries({

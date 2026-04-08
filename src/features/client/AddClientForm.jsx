@@ -8,27 +8,31 @@ import { useAddItem } from "../../hooks/useAddItem";
 import { addItem } from "../../services/apiServices";
 import EmptyFieldErrorMessage from "../../ui/EmptyFieldErrorMessage";
 
-function AddClientForm({ closeForm }) {
+function AddClientForm({
+  closeForm,
+  defaultValues,
+  btnText,
+  operationFn,
+  isLoading,
+}) {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
-
-  const { addItem: addClient, isPending: isAddingClient } = useAddItem(
-    addItem,
-    "clients",
-  );
+  } = useForm({ defaultValues });
 
   function onSubmit(data) {
     console.log(data);
-    if (!data || isAddingClient) return;
-    addClient(data);
+    if (!data || isLoading) return;
+    operationFn(data);
     closeForm();
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="lg:p-8 p-4 w-80 lg:100">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="lg:p-8 p-4 w-80 lg:w-150 lg:100"
+    >
       <FormHeader
         name="Add Client"
         closeForm={closeForm}
@@ -36,7 +40,7 @@ function AddClientForm({ closeForm }) {
       />
 
       <FormInputBox>
-        <Label labelName="name">Client Name</Label>
+        <Label labelName="">Client Name</Label>
         <Input
           register={register}
           placeholder="Abdullah"
@@ -47,7 +51,7 @@ function AddClientForm({ closeForm }) {
         <EmptyFieldErrorMessage message={errors.name?.message} />
       </FormInputBox>
       <FormInputBox>
-        <Label labelName="address">Address</Label>
+        <Label labelName="">Address</Label>
         <Input
           name="address"
           placeholder="Kalu Khan parra"
@@ -58,7 +62,7 @@ function AddClientForm({ closeForm }) {
         <EmptyFieldErrorMessage message={errors.address?.message} />
       </FormInputBox>
       <FormInputBox>
-        <Label labelName="mobileNo">Mobile No</Label>
+        <Label labelName="">Mobile No</Label>
         <Input
           name="mobileNo"
           placeholder="0370 9549535"
@@ -68,7 +72,7 @@ function AddClientForm({ closeForm }) {
         />
         <EmptyFieldErrorMessage message={errors.mobileNo?.message} />
       </FormInputBox>
-      <FormSubmittingSection isPending={isAddingClient} btnName="Add Client" />
+      <FormSubmittingSection isPending={isLoading} btnName={btnText} />
     </form>
   );
 }

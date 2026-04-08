@@ -1,10 +1,5 @@
 import { HiMenu, HiSearch, HiX } from "react-icons/hi";
-import {
-  HiChevronLeft,
-  HiChevronRight,
-  HiOutlineMoon,
-  HiPlus,
-} from "react-icons/hi2";
+import { HiOutlineMoon, HiPlus } from "react-icons/hi2";
 import OperationsTripForm from "../features/trip/addTripForm/OperationsTripForm";
 import { useAddTrip } from "../features/trip/useAddTrip";
 import { useState } from "react";
@@ -13,6 +8,8 @@ import Modal from "./Modal";
 import AddClientForm from "../features/client/AddClientForm";
 import AddDriverForm from "../features/driver/AddDriverForm";
 import { Link } from "react-router-dom";
+import { useAddItem } from "../hooks/useAddItem";
+import { addItem } from "../services/apiServices";
 
 function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
@@ -20,6 +17,14 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddClientForm, setShowAddClientForm] = useState(false);
   const [showAddDriverForm, setShowAddDriverForm] = useState(false);
   const { addTrip, isAddingTrip } = useAddTrip();
+  const { addItem: addClient, isPending: isAddingClient } = useAddItem(
+    addItem,
+    "clients",
+  );
+  const { addItem: addDriver, isPending: isAddingDriver } = useAddItem(
+    addItem,
+    "drivers",
+  );
   return (
     <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
       <div className="flex items-center justify-center w-14 lg:w-60 mr-4 border-r border-stone-300 h-full ">
@@ -103,12 +108,24 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
           )}
           {showAddClientForm && (
             <Modal closeForm={() => setShowAddClientForm(false)}>
-              <AddClientForm closeForm={() => setShowAddClientForm(false)} />
+              <AddClientForm
+                closeForm={() => setShowAddClientForm(false)}
+                btnText="Add Client"
+                operationFn={addClient}
+                isLoading={isAddingClient}
+              />
             </Modal>
           )}
           {showAddDriverForm && (
             <Modal closeForm={() => setShowAddDriverForm(false)}>
-              <AddDriverForm closeForm={() => setShowAddDriverForm(false)} />
+              <AddDriverForm
+                closeForm={() => setShowAddDriverForm(false)}
+                btnText="Add Driver"
+                operationFn={addDriver}
+                isPending={isAddingDriver}
+                name="Add Driver"
+                description="Fill the following credentials to add new driver"
+              />
             </Modal>
           )}
         </div>

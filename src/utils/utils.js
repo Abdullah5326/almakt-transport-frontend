@@ -12,3 +12,13 @@ export function countItemsByStatus(items, statusName) {
 
   return initialValue;
 }
+
+export function formatCurrency(amount) {
+  const formatAmount = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "AED",
+  });
+  return formatAmount.format(amount);
+}
+
+console.log(formatCurrency(50));

@@ -5,22 +5,24 @@ import Label from "../../ui/Label";
 import Input from "../../ui/Input";
 import EmptyFieldErrorMessage from "../../ui/EmptyFieldErrorMessage";
 import FormSubmittingSection from "../../ui/FormSubmittingSection";
-import DatePicker from "../../ui/DatePicker";
-import { useAddItem } from "../../hooks/useAddItem";
-import { addItem } from "../../services/apiServices";
 
-function AddDriverForm({ closeForm }) {
-  const { addItem: addDriver, isPending: isAddingDriver } = useAddItem(
-    addItem,
-    "drivers",
-  );
+function AddDriverForm({
+  closeForm,
+  defaultValues,
+  operationFn,
+  isPending,
+  btnText,
+  name,
+  description,
+}) {
+  console.log(defaultValues);
+
   const {
     handleSubmit,
     register,
-    control,
     formState: { errors },
   } = useForm({
-    defaultValues: {
+    defaultValues: defaultValues || {
       name: "Abdullah",
       // idCardExpiryDate: "2026-04-04",
       vehicleFlatNo: "LHR 400",
@@ -32,26 +34,18 @@ function AddDriverForm({ closeForm }) {
   });
 
   function onSubmit(data) {
-    if (!data || isAddingDriver) return;
-    const driver = {
-      ...data,
-      idCardExpiryDate: data.idCardExpiryDate?.format("YYYY-MM-DD"),
-      vehicleRenewalDate: data.vehicleRenewalDate?.format("YYYY-MM-DD"),
-    };
+    if (!data || isPending) return;
+    console.log(data);
 
-    addDriver(driver);
+    operationFn(data);
     closeForm();
   }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="lg:p-8 lg:w-180 h-90  md:h-160 w-80 p-4 text-xs md:text-md animate-showForm"
+      className="lg:p-8 lg:w-180 h-90  md:h-160 w-80 p-4 text-xs md:text-[15px] animate-showForm"
     >
-      <FormHeader
-        name="Add New Driver"
-        description="Fill the following credentials to add new driver in your business."
-        closeForm={closeForm}
-      />
+      <FormHeader name={name} description={description} closeForm={closeForm} />
 
       <FormInputBox>
         <Label labelName="Name"></Label>
@@ -102,12 +96,19 @@ function AddDriverForm({ closeForm }) {
         </FormInputBox>
         <FormInputBox>
           <Label labelName="Email"></Label>
-          <Input
+          {/* <Input
             type="email"
             register={register}
             placeholder="abdullah@example.com"
             labelName="email"
             name="email"
+          /> */}
+          <input
+            type="email"
+            register={"email"}
+            placeholder="abdullah@example.com"
+            name="email"
+            className="border-stone-200 w-full bg-white h-10 px-3 rounded-lg placeholder:text-sm outline-orange-400 text-stone-900"
           />
           <EmptyFieldErrorMessage message={errors.email?.message} />
         </FormInputBox>
@@ -115,21 +116,24 @@ function AddDriverForm({ closeForm }) {
       <div lassName="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Id Card Expiry Date"></Label>
-          <DatePicker
-            control={control}
-            errMsg={errors.idCardExpiryDate?.message}
+
+          <Input
+            type="date"
+            labelName="Id card expiry date"
             name="idCardExpiryDate"
+            register={register}
           />
           <EmptyFieldErrorMessage message={errors.idCardExpiryDate?.message} />
         </FormInputBox>
         <FormInputBox>
           <Label labelName="Vehicle Renewal Date"></Label>
-          <DatePicker
-            control={control}
-            errMsg={errors.vehicleRenewalDate?.message}
-            name="vehicleRenewalDate"
-          />
 
+          <Input
+            type="date"
+            labelName="vechicle renewal date"
+            name="vehicleRenewalDate"
+            register={register}
+          />
           <EmptyFieldErrorMessage
             message={errors.vehicleRenewalDate?.message}
           />
@@ -147,7 +151,7 @@ function AddDriverForm({ closeForm }) {
         <EmptyFieldErrorMessage message={errors.basicSalary?.message} />
       </FormInputBox>
 
-      <FormSubmittingSection isPending={false} btnName="Add Driver" />
+      <FormSubmittingSection isPending={false} btnName={btnText} />
     </form>
   );
 }

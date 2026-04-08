@@ -1,5 +1,5 @@
-// const _URL = "http://localhost:3000/api/v1";
-const CLOUD_URL = "https://almakt-transport-backend.onrender.com/api/v1";
+const CLOUD_URL = "http://localhost:3000/api/v1";
+// const CLOUD_URL = "https://almakt-transport-backend.onrender.com/api/v1";
 
 export async function getAllItems(endpoint) {
   const res = await fetch(`${CLOUD_URL}/${endpoint}`);
@@ -42,8 +42,9 @@ export async function getItem(endpoint, id) {
   return data.data.data;
 }
 
-export async function updateItem(updateData) {
-  const res = await fetch(`${CLOUD_URL}/trips/${updateData._id}`, {
+export async function updateItem(updateData, endpoint) {
+  console.log(updateData);
+  const res = await fetch(`${CLOUD_URL}/${endpoint}/${updateData.id}`, {
     method: "PATCH",
     body: JSON.stringify(updateData),
     headers: {
