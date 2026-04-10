@@ -2,26 +2,20 @@ import PrimaryHeading from "../../ui/PrimaryHeading";
 import DashboardCard from "./DashboardCard";
 import { calcTotalItemsSum } from "../../utils/calcTotalItemsSum";
 import TripDurationFilter from "../../ui/TripDurationFilter";
-import Chart from "../../ui/Chart";
 import { useSelector } from "react-redux";
 import Trips from "../trip/Trips";
 import { useGetItems } from "../../hooks/useGetItems";
-import { getAllItems, getItem } from "../../services/apiServices";
-import PieChartUI from "../../ui/PieChartUI";
+import { getAllItems } from "../../services/apiServices";
 import BarChartUI from "../../ui/BarChartUI";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { formatCurrency } from "../../utils/utils";
 import { useRef, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Dashboard() {
   const tripListRef = useRef(null);
-  const { tripsDurationFilter, tripsDurationType } = useSelector(
-    (state) => state.trip,
-  );
-  // const { data: allTrips, isPending } = useGetItems(
-  //   `last-${tripsDurationFilter}-trips`,
-  //   () => getAllItems(`trips/last-${tripsDurationFilter}-trips`),
-  // );
+  const { scrollableContainer } = useOutletContext();
+  const { tripsDurationType } = useSelector((state) => state.trip);
   const { data: allTrips, isPending } = useGetItems(
     `trips-by-duration?duration=${tripsDurationType}`,
     () => getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
@@ -36,6 +30,18 @@ function Dashboard() {
   const amountWithDriversTrips = allTrips.filter(
     (trip) => trip.paidTo === "driver",
   );
+
+  const scrollToTrips = (show) => {
+    if (tripListRef.current && scrollableContainer?.current) {
+      const elementPosition = tripListRef.current.offsetTop;
+      scrollableContainer.current.scrollTo({
+        top: elementPosition - 20,
+        behavior: "smooth",
+      });
+      setShowAllTrips(show);
+    }
+  };
+
   return (
     <div className="lg:px-6 px-2  relative">
       <div className="mb-6 flex text-xs justify-between pt-4 lg:pr-30 lg:p-8 sm:gap-4 lg:gap-8">
@@ -51,10 +57,7 @@ function Dashboard() {
           name="Total revenue"
           value={`${formatCurrency(calcTotalItemsSum(allTrips, "tripPrice"))}`}
           percentChange={20}
-          onClick={() => {
-            setShowAllTrips(true);
-            tripListRef.current.scrollIntoView({ behavior: "smooth" });
-          }}
+          onClick={() => scrollToTrips(true)}
         />
         <DashboardCard
           name="Total Trips"
@@ -71,10 +74,7 @@ function Dashboard() {
           name="Amount with Drivers"
           value={`${formatCurrency(calcTotalItemsSum(amountWithDriversTrips, "receivedAmount"))}`}
           percentChange={5}
-          onClick={() => {
-            setShowAllTrips(false);
-            tripListRef.current.scrollIntoView({ behavior: "smooth" });
-          }}
+          onClick={() => scrollToTrips(false)}
         />
       </div>
       <div className="flex flex-col lg:flex-row gap-30 items-center mb-15">

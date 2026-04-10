@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import { useGetItem } from "../../hooks/useGetItem";
 import { getItem } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
-import { countItemsByStatus } from "../../utils/utils";
+import { countItemsByStatus, formatCurrency } from "../../utils/utils";
 import Trips from "../trip/Trips";
 
 export default function DriverDetails() {
@@ -23,6 +23,10 @@ export default function DriverDetails() {
     driverId,
   );
   if (isLoadingDriver) return <LoadingSpinner />;
+  const remainingAmountWithDriver = driver.trips
+    .filter((trip) => trip.paidTo === "driver")
+    .reduce((prev, cur) => prev + cur.receivedAmount, 0);
+  console.log(remainingAmountWithDriver);
   return (
     <div className="lg:p-8 p-2 w-full h-full">
       <BackButton path="Drivers" />
@@ -54,7 +58,7 @@ export default function DriverDetails() {
         </DetailsStatisticsBox>
         <DetailsStatisticsBox
           stateName="Basic Salary"
-          value={driver.basicSalary || 50000}
+          value={formatCurrency(driver.basicSalary)}
         >
           <p className="p-3 text-xl rounded-xl bg-yellow-500 text-white">
             <FiDollarSign className="h-6 w-6" />
@@ -62,7 +66,7 @@ export default function DriverDetails() {
         </DetailsStatisticsBox>
         <DetailsStatisticsBox
           stateName="Remaining Amount"
-          value={driver.basicSalary || 50000}
+          value={formatCurrency(remainingAmountWithDriver)}
         >
           <p className="p-3 text-xl rounded-xl bg-red-500 text-white">
             <HiOutlineDocumentCurrencyDollar className="h-6 w-6" />

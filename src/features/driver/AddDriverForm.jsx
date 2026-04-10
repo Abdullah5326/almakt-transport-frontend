@@ -38,11 +38,16 @@ function AddDriverForm({
     () => getAllItems("vehicles"),
   );
   function onSubmit(data) {
-    if (!data || isPending) return;
-    console.log(data);
+    if (!data) return;
 
-    operationFn(data);
-    closeForm();
+    operationFn(data, {
+      onSuccess: () => {
+        if (!isPending) closeForm();
+      },
+      onError: () => {
+        console.log("Operation failed");
+      },
+    });
   }
   return (
     <form
@@ -152,7 +157,7 @@ function AddDriverForm({
         <EmptyFieldErrorMessage message={errors.basicSalary?.message} />
       </FormInputBox>
 
-      <FormSubmittingSection isPending={false} btnName={btnText} />
+      <FormSubmittingSection isPending={isPending} btnName={btnText} />
     </form>
   );
 }

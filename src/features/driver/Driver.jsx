@@ -17,7 +17,7 @@ function Driver() {
           <PrimaryHeading>Drivers</PrimaryHeading>
           <p>Here is your business drivers</p>
         </div>
-        <div className="rounded-2xl bg-white h-100 lg:h-180 border-2 border-stone-200">
+        <div className="rounded-2xl bg-white h-100 lg:h-screen border-2 border-stone-200">
           <div className="border-b-2 border-stone-200 grid  md:grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] py-4 rounded-t-lg px-2 bg-orange-400">
             <p className="hidden md:block">S.No</p>
             <p>Name</p>
@@ -27,7 +27,7 @@ function Driver() {
             <p className="hidden md:block">Call No</p>
             <p>Status</p>
           </div>
-          <ul className="divide-y divide-stone-100 overflow-y-auto h-80 lg:h-170">
+          <ul className="divide-y divide-stone-100 overflow-y-auto h-s lg:h-[90vh]">
             {drivers.map((driver, i) => (
               <DriverListItem driver={driver} no={i} key={driver.id} />
             ))}

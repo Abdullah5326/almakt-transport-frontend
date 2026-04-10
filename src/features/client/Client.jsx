@@ -24,7 +24,7 @@ function Client() {
             <p className="hidden md:block">Mobile No</p>
             <p>Status</p>
           </div>
-          <ul className="divide-y divide-stone-100 overflow-y-auto h-110">
+          <ul className="divide-y divide-stone-100 overflow-y-auto h-[90vh]">
             {clients.map((client, i) => (
               <ClientListItem client={client} no={i} key={client.id} />
             ))}

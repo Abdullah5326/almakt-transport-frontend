@@ -4,7 +4,7 @@ function TripsItemHeader() {
       <p>S.No</p>
       <p>Name</p>
       <p className="hidden lg:block">Driver Name</p>
-      <p className="hidden lg:block">Price</p>
+      <p className="hidden lg:block">Remaining</p>
       <p className="hidden lg:block">Paid To</p>
       <p className="hidden lg:block">Handover Date</p>
       <p className="">Deadline</p>

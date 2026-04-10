@@ -67,24 +67,38 @@ function TripItem({ trip }) {
         />
       </div>
       <p className="capitalize line-clamp-1">{trip.name}</p>
-      <p className="hidden lg:block">{trip.driver.name}</p>
-      <p className="hidden lg:block">{trip.tripPrice}</p>
+      <p className="hidden lg:block">{trip.driver?.name}</p>
+      <p className="hidden lg:block">
+        <span className="text-xs">AED </span>
+        {trip.tripPrice - trip.receivedAmount}
+      </p>
       <div className="justify-self-start hidden lg:block ">
-        <StatusTag
-          value={trip.paidTo === "owner"}
-          options={{
-            successText: "owner",
-            failText: "driver",
-            failTextBgColor: "red",
-          }}
-        />
+        {trip.paidTo === "owner" && (
+          <p
+            className={`bg-green-500 text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
+          >
+            {trip.paidTo}
+          </p>
+        )}
+        {trip.paidTo === "driver" && (
+          <p
+            className={`bg-red-500 text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
+          >
+            {trip.paidTo}
+          </p>
+        )}
+        {trip.paidTo !== "owner" && trip.paidTo !== "driver" && (
+          <p
+            className={`bg-yellow-500 text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
+          >
+            Credit
+          </p>
+        )}
       </div>
       <p className="hidden lg:block">
-        {new Date(trip.startDate).toLocaleDateString() || "02-03-2026"}
+        {new Date(trip.startDate).toLocaleDateString()}
       </p>
-      <p className="">
-        {new Date(trip.deadlineDate).toLocaleDateString() || "02-03-2026"}
-      </p>
+      <p className="">{new Date(trip.deadlineDate).toLocaleDateString()}</p>
       <div className="flex justify-between items-center  pl-2 ">
         <p
           className={`  text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
@@ -103,12 +117,13 @@ function TripItem({ trip }) {
           </span>
         </p>
         <OperationMenu
-          disabledValue={isDeletingTrip}
+          disableDeleteValue={isDeletingTrip}
           itemId={trip._id}
           operationDeleteFn={deleteTrip}
           operationUpdateFn={updateTrip}
           item={trip}
           toggleEditForm={setShowUpdateTripForm}
+          disableUpdateValue={isUpdatingTrip}
         />
         {showUpdateTripForm && (
           <Modal closeForm={() => setShowUpdateTripForm(false)}>
@@ -121,8 +136,8 @@ function TripItem({ trip }) {
                 deadlineDate:
                   new Date(trip.deadlineDate)?.toISOString().split("T")[0] ||
                   "2027-04-25",
-                client: trip.client._id,
-                driver: trip.driver._id,
+                client: trip.client?._id,
+                driver: trip.driver?._id,
               }}
               name="Update The Trip"
               isPending={isUpdatingTrip}

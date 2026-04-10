@@ -23,9 +23,15 @@ function AddVehicleForm({
 
   function onSubmit(data) {
     console.log(data);
-    if (!data || isLoading) return;
-    operationFn(data);
-    closeForm();
+    if (!data) return;
+    operationFn(data, {
+      onSuccess: () => {
+        if (!isLoading) closeForm();
+      },
+      onError: () => {
+        console.log("Operation failed");
+      },
+    });
   }
 
   return (

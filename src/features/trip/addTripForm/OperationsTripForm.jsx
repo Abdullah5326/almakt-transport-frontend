@@ -18,6 +18,7 @@ function OperationTripForm({
   closeForm,
   submitBtnName,
 }) {
+  console.log(isPending);
   const today = new Date().toISOString().split("T")[0];
   const {
     register,
@@ -28,7 +29,7 @@ function OperationTripForm({
     defaultValues: defaultValues
       ? defaultValues
       : {
-          name: "Trip to Karachi",
+          name: "Trip to new",
           origin: "Lahore Multan",
           destination: "Karachi Landa Bazar",
           startDate: today,
@@ -43,8 +44,15 @@ function OperationTripForm({
   });
   function onSubmit(data) {
     console.log("SUBMIT");
-    if (data && !isPending) operationFn(data);
-    if (!isPending) closeForm();
+    if (data)
+      operationFn(data, {
+        onSuccess: () => {
+          if (!isPending) closeForm();
+        },
+        onError: () => {
+          console.log("Operation failed");
+        },
+      });
   }
 
   return (

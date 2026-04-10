@@ -2,10 +2,11 @@ import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import ButtonSmall from "./ButtonSmall";
 
 function OperationMenu({
-  disabledValue,
+  disableDeleteValue,
   operationDeleteFn,
   itemId,
   toggleEditForm,
+  disableUpdateValue,
 }) {
   function handleDeleteBtn(e) {
     e.stopPropagation();
@@ -20,10 +21,10 @@ function OperationMenu({
   }
   return (
     <div className="cursor-pointer flex gap-1 md:gap-2 items-center lg:pr-4">
-      <ButtonSmall disabledValue={disabledValue} onClick={handleDeleteBtn}>
+      <ButtonSmall disabledValue={disableDeleteValue} onClick={handleDeleteBtn}>
         <HiOutlineTrash className="w-5 h-5 text-stone-500" />
       </ButtonSmall>
-      <ButtonSmall disabledValue={disabledValue} onClick={handleEditBtn}>
+      <ButtonSmall disabledValue={disableUpdateValue} onClick={handleEditBtn}>
         <HiOutlinePencil className="hover:text-yellow-900" />
       </ButtonSmall>
     </div>
