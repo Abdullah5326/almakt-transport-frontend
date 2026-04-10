@@ -24,7 +24,7 @@ function Vehicle() {
           <p className="hidden md:block">S.No</p>
           <p>Name</p>
           <p> Flat No</p>
-          <p className="hidden md:block">Vehicle Renewal Date</p>
+          <p className=""> Renewal</p>
         </div>
         <ul className="divide-y divide-stone-100 overflow-y-auto h-80 lg:h-[90vh]">
           {vehicles?.map((vehicle, i) => (
