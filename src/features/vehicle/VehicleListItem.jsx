@@ -14,12 +14,12 @@ function VehicleListItem({ vehicle, no }) {
     useDeleteItem(deleteItem, "vehicles", "vehicles");
   return (
     <li className=" capitalize grid md:grid-cols-[5rem_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] hover:bg-stone-100 transition-all py-4 rounded-t-lg px-2 cursor-pointer text-sm lg:text-[16px]">
-      <p className="hidden md:block">{no + 1}</p>
+      <p className=" ">{no + 1}</p>
       <p>{vehicle.name}</p>
       <p>
         <span>{vehicle.flatNo || "LHR 400"}</span>
       </p>
-      <div className="hidden md:flex justify-around">
+      <div className="  justify-around">
         <p>{new Date(vehicle.vehicleRenewalDate).toLocaleDateString()}</p>
         <OperationMenu
           operationDeleteFn={deleteVehicle}
