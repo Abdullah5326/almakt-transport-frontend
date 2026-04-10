@@ -19,7 +19,7 @@ export async function addItem(endpoint, item) {
     },
   });
   const data = await res.json();
-
+  console.log(data, "api");
   if (!res.ok)
     throw new Error(
       "There is an error in adding " +
@@ -44,7 +44,7 @@ export async function getItem(endpoint, id) {
 
 export async function updateItem(updateData, endpoint) {
   console.log(updateData);
-  const res = await fetch(`${CLOUD_URL}/${endpoint}/${updateData.id}`, {
+  const res = await fetch(`${CLOUD_URL}/${endpoint}/${updateData._id}`, {
     method: "PATCH",
     body: JSON.stringify(updateData),
     headers: {

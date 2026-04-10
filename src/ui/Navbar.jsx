@@ -10,12 +10,14 @@ import AddDriverForm from "../features/driver/AddDriverForm";
 import { Link } from "react-router-dom";
 import { useAddItem } from "../hooks/useAddItem";
 import { addItem } from "../services/apiServices";
+import AddVehicleForm from "../features/vehicle/AddVehicleForm";
 
 function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
   const [showAddMemberContainer, setAddMemberContainer] = useState(false);
   const [showAddClientForm, setShowAddClientForm] = useState(false);
   const [showAddDriverForm, setShowAddDriverForm] = useState(false);
+  const [showAddVehicleForm, setShowAddVehicleForm] = useState(false);
   const { addTrip, isAddingTrip } = useAddTrip();
   const { addItem: addClient, isPending: isAddingClient } = useAddItem(
     addItem,
@@ -24,6 +26,10 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const { addItem: addDriver, isPending: isAddingDriver } = useAddItem(
     addItem,
     "drivers",
+  );
+  const { addItem: addVehicle, isPending: isAddingVehicle } = useAddItem(
+    addItem,
+    "vehicles",
   );
   return (
     <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
@@ -89,6 +95,10 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
                   setShowAddDriverForm(true);
                   setAddMemberContainer(false);
                 }}
+                showAddVehicleForm={() => {
+                  setShowAddVehicleForm(true);
+                  setAddMemberContainer(false);
+                }}
               />
             )}
           </div>
@@ -113,6 +123,8 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
                 btnText="Add Client"
                 operationFn={addClient}
                 isLoading={isAddingClient}
+                name="Add Client"
+                description="Fill the details to add new client in your business"
               />
             </Modal>
           )}
@@ -125,6 +137,18 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
                 isPending={isAddingDriver}
                 name="Add Driver"
                 description="Fill the following credentials to add new driver"
+              />
+            </Modal>
+          )}
+          {showAddVehicleForm && (
+            <Modal closeForm={() => setShowAddVehicleForm(false)}>
+              <AddVehicleForm
+                btnText="Add Vehicle"
+                name="Add Vehicle"
+                description="Fill the following details to add new vehicle"
+                operationFn={addVehicle}
+                isLoading={isAddingVehicle}
+                closeForm={() => setShowAddVehicleForm(false)}
               />
             </Modal>
           )}

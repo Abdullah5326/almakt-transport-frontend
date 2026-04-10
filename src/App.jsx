@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import TripDetails from "./features/trip/TripDetails";
 import ClientDetails from "./features/client/ClientDetails";
 import DriverDetails from "./features/driver/DriverDetails";
+import Vehicle from "./features/vehicle/Vehicle";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/drivers/:driverId" element={<DriverDetails />} />
             <Route path="/trips" element={<Trip />} />
             <Route path="/trips/:tripId" element={<TripDetails />} />
+            <Route path="/vehicles" element={<Vehicle />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -5,6 +5,9 @@ import Label from "../../ui/Label";
 import Input from "../../ui/Input";
 import EmptyFieldErrorMessage from "../../ui/EmptyFieldErrorMessage";
 import FormSubmittingSection from "../../ui/FormSubmittingSection";
+import SelectInput from "../../ui/SelectInput";
+import { useGetItems } from "../../hooks/useGetItems";
+import { getAllItems } from "../../services/apiServices";
 
 function AddDriverForm({
   closeForm,
@@ -20,19 +23,20 @@ function AddDriverForm({
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: defaultValues || {
       name: "Abdullah",
-      // idCardExpiryDate: "2026-04-04",
-      vehicleFlatNo: "LHR 400",
-      vehicleName: "Honda",
-      email: "abdul@example.com",
-      basicSalary: 40000,
-      mobileNo: "0314343434",
+      basicSalary: 4023,
+      idCardExpiryDate: "2026-04-20",
+      mobileNo: "03163942308",
     },
   });
-
+  const { data: vehicles, isPending: isLoadingDrivers } = useGetItems(
+    "vehicles",
+    () => getAllItems("vehicles"),
+  );
   function onSubmit(data) {
     if (!data || isPending) return;
     console.log(data);
@@ -58,30 +62,23 @@ function AddDriverForm({
         />
         <EmptyFieldErrorMessage message={errors.name?.message} />
       </FormInputBox>
-      <div className="flex md:gap-12 flex-col md:flex-row">
-        <FormInputBox>
-          <Label labelName="Vehicle Name"></Label>
-          <Input
-            type="text"
-            register={register}
-            placeholder="Honda"
-            labelName="Vehicle Name"
-            name="vehicleName"
+      <FormInputBox>
+        <Label>Select Vehicle</Label>
+        {!isLoadingDrivers && (
+          <SelectInput
+            control={control}
+            errMsg="Please select any vehicle for the driver"
+            placeholder="Select Vehicle"
+            options={vehicles}
+            name="vehicle"
+            optionName="name"
+            value="_id"
           />
-          <EmptyFieldErrorMessage message={errors.vehicleName?.message} />
-        </FormInputBox>
-        <FormInputBox>
-          <Label labelName="Vehicle Flat No"></Label>
-          <Input
-            type="text"
-            register={register}
-            placeholder="LHR 400"
-            labelName="Vehicle Flat No"
-            name="vehicleFlatNo"
-          />
-          <EmptyFieldErrorMessage message={errors.vehicleFlatNo?.message} />
-        </FormInputBox>
-      </div>
+        )}
+        {errors?.vehicle && (
+          <EmptyFieldErrorMessage message={errors.vehicle.message} />
+        )}
+      </FormInputBox>
       <div className="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Mobile No"></Label>
@@ -113,7 +110,7 @@ function AddDriverForm({
           <EmptyFieldErrorMessage message={errors.email?.message} />
         </FormInputBox>
       </div>
-      <div lassName="flex md:gap-12 flex-col md:flex-row">
+      <div className="flex md:gap-12 flex-col md:flex-row">
         <FormInputBox>
           <Label labelName="Id Card Expiry Date"></Label>
 
@@ -126,17 +123,21 @@ function AddDriverForm({
           <EmptyFieldErrorMessage message={errors.idCardExpiryDate?.message} />
         </FormInputBox>
         <FormInputBox>
-          <Label labelName="Vehicle Renewal Date"></Label>
-
-          <Input
-            type="date"
-            labelName="vechicle renewal date"
-            name="vehicleRenewalDate"
-            register={register}
+          <Label>Status</Label>
+          <SelectInput
+            name="status"
+            options={[
+              { label: "Active", value: "active" },
+              { label: "Inactive", value: "inactive" },
+              { label: "On Leave", value: "onLeave" },
+            ]}
+            optionName="label"
+            value="value"
+            placeholder="select status"
+            errMsg="The status of the driver is required"
+            control={control}
           />
-          <EmptyFieldErrorMessage
-            message={errors.vehicleRenewalDate?.message}
-          />
+          <EmptyFieldErrorMessage message={errors.idCardExpiryDate?.message} />
         </FormInputBox>
       </div>
       <FormInputBox>

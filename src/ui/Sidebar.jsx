@@ -10,6 +10,7 @@ import {
   HiOutlineDocumentCurrencyDollar,
   HiOutlineWrenchScrewdriver,
 } from "react-icons/hi2";
+import { TbSteeringWheelFilled } from "react-icons/tb";
 
 function Sidebar({ showSmallNav, setShowSmallNav }) {
   return (
@@ -58,6 +59,16 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
             <SidebarItem
               to="/drivers"
               itemName="Drivers"
+              showSmallNav={showSmallNav}
+              onClick={() => setShowSmallNav(false)}
+            >
+              <span>
+                <TbSteeringWheelFilled className="h-5 w-5" />
+              </span>
+            </SidebarItem>
+            <SidebarItem
+              to="/vehicles"
+              itemName="Vehicles"
               showSmallNav={showSmallNav}
               onClick={() => setShowSmallNav(false)}
             >

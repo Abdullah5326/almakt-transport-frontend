@@ -52,6 +52,8 @@ function ClientListItem({ client, no }) {
               btnText="Update Client"
               operationFn={updateClient}
               isLoading={isLoadingClient}
+              name="Update Client"
+              description="Fill the following inputs to update client"
             />
           </Modal>
         )}

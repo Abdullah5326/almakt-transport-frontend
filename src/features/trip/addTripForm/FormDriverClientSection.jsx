@@ -32,7 +32,7 @@ function FormDriverClientSection({ errors, control }) {
               options={drivers}
               optionName="name"
               errMsg="Please select any driver for trip"
-              value={"_id"}
+              value="_id"
             />
           )}
           {errors?.driver && (

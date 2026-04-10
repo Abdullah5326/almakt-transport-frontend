@@ -4,6 +4,7 @@ const initialState = {
   tripsDurationFilter: "month",
   showOperationsForm: false,
   showUpdatingTripForm: false,
+  tripsDurationType: "daily",
 };
 
 export const tripSlice = createSlice({
@@ -19,6 +20,9 @@ export const tripSlice = createSlice({
     toggleUpdateTripForm: (state, action) => {
       state.showUpdatingTripForm = action.payload;
     },
+    changeTripsDurationType: (state, action) => {
+      state.tripsDurationType = action.payload;
+    },
   },
 });
 
@@ -26,6 +30,7 @@ export const {
   changeTripsDurationFilter,
   toggleOperationForm,
   toggleUpdateTripForm,
+  changeTripsDurationType,
 } = tripSlice.actions;
 
 export default tripSlice.reducer;

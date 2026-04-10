@@ -25,11 +25,14 @@ function DriverListItem({ driver, no }) {
       <p className="hidden md:block">{no + 1}</p>
       <p>{driver.name}</p>
       <p>
-        <span>{driver.vehicleFlatNo || "LHR 400"}</span>
-        <span className="text-sm text-stone-600"> ({driver.vehicleName})</span>
+        <span>{driver.vehicle?.flatNo}</span>
+        <span className="text-sm text-stone-600">
+          {" "}
+          ({driver.vehicle?.name})
+        </span>
       </p>
       <p className="hidden md:block">
-        {new Date(driver.vehicleRenewalDate).toLocaleDateString()}
+        {new Date(driver.vehicle?.vehicleRenewalDate).toLocaleDateString()}
       </p>
       <p className="hidden md:block">
         {new Date(driver.idCardExpiryDate).toLocaleDateString()}
@@ -41,10 +44,12 @@ function DriverListItem({ driver, no }) {
       </p> */}
       <p className="hidden md:block">{driver.mobileNo}</p>
       <div className="flex justify-between items-center">
-        <StatusTag
-          value={driver.status === "active"}
-          options={{ successText: "Active", errorText: "unactive" }}
-        />
+        <p
+          className={`${driver.status === "active" && "bg-green-500"} ${driver.status === "inactive" && "bg-red-500"} 
+      ${driver.status === "onLeave" && "bg-yellow-500"} text-white rounded-full px-2 `}
+        >
+          {driver.status}
+        </p>
 
         <OperationMenu
           disabledValue={isDeletingDriver}
@@ -60,11 +65,9 @@ function DriverListItem({ driver, no }) {
                 idCardExpiryDate: new Date(driver.idCardExpiryDate)
                   ?.toISOString()
                   .split("T")[0],
-                vehicleRenewalDate: new Date(driver.vehicleRenewalDate)
-                  ?.toISOString()
-                  .split("T")[0],
+                vehicle: driver.vehicle?._id,
               }}
-              name="Update The Trip"
+              name="Update Driver"
               isPending={isUpdatingDriver}
               description="Update the fields that you want to change"
               closeForm={() => setShowUpdateDriverForm(false)}

@@ -41,13 +41,20 @@ function TripItem({ trip }) {
           onChange={(e) => {
             e.stopPropagation();
             e.preventDefault();
+
+            if (trip.receivedAmount < trip.tripPrice && !trip.isCompleted) {
+              toast.error(
+                "The total price of trip is not received from client.",
+              );
+              return;
+            }
+
             if (trip.paidTo !== "owner" && !trip.isCompleted) {
               toast.error("The amount is not paid yet from the drivers.");
               return;
             }
-
             if (!isUpdatingTrip) {
-              updateTrip({ id: trip._id, isCompleted: !trip.isCompleted });
+              updateTrip({ _id: trip._id, isCompleted: !trip.isCompleted });
               setTripCompleted((completed) => !completed);
             }
           }}

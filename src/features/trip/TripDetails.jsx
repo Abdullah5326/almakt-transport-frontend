@@ -128,7 +128,12 @@ function TripDetails() {
               </span>
               <div>
                 <p className="text-sm text-stone-500">Driver</p>
-                <p className="font-bold">{trip.driver?.name || "Amjad Khan"}</p>
+                <p
+                  className="font-bold underline cursor-pointer"
+                  onClick={() => navigate(`/drivers/${trip.driver._id}`)}
+                >
+                  {trip.driver?.name}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3 pt-4">
@@ -137,8 +142,11 @@ function TripDetails() {
               </span>
               <div>
                 <p className="text-sm text-stone-500">Client</p>
-                <p className="font-bold">
-                  {trip.client?.name || "Mashal Khan"}
+                <p
+                  className="font-bold underline  cursor-pointer"
+                  onClick={() => navigate(`/clients/${trip.client._id}`)}
+                >
+                  {trip.client?.name}
                 </p>
               </div>
             </div>

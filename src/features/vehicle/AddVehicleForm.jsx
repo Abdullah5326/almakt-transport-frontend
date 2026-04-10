@@ -6,7 +6,7 @@ import FormSubmittingSection from "../../ui/FormSubmittingSection";
 import FormInputBox from "../../ui/FormInputBox";
 import EmptyFieldErrorMessage from "../../ui/EmptyFieldErrorMessage";
 
-function AddClientForm({
+function AddVehicleForm({
   closeForm,
   defaultValues,
   btnText,
@@ -19,7 +19,7 @@ function AddClientForm({
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm({ defaultValues });
+  } = useForm({ defaultValues: defaultValues || {} });
 
   function onSubmit(data) {
     console.log(data);
@@ -36,10 +36,10 @@ function AddClientForm({
       <FormHeader name={name} closeForm={closeForm} description={description} />
 
       <FormInputBox>
-        <Label labelName="">Client Name</Label>
+        <Label labelName="">Vehicle Name</Label>
         <Input
           register={register}
-          placeholder="Abdullah"
+          placeholder="Suzuki"
           labelName="name"
           name="name"
           type="text"
@@ -47,30 +47,30 @@ function AddClientForm({
         <EmptyFieldErrorMessage message={errors.name?.message} />
       </FormInputBox>
       <FormInputBox>
-        <Label labelName="">Address</Label>
+        <Label labelName="">Flat No</Label>
         <Input
-          name="address"
-          placeholder="Kalu Khan parra"
+          name="flatNo"
+          placeholder="C-404"
           register={register}
-          labelName="address"
+          labelName="flatNo"
           type="text"
         />
-        <EmptyFieldErrorMessage message={errors.address?.message} />
+        <EmptyFieldErrorMessage message={errors.flatNo?.message} />
       </FormInputBox>
       <FormInputBox>
-        <Label labelName="">Mobile No</Label>
+        <Label labelName="">Vehicle Renewal Date</Label>
         <Input
-          name="mobileNo"
-          placeholder="0370 9549535"
+          name="vehicleRenewalDate"
+          placeholder="2027-04-26"
           register={register}
-          labelName="mobileNo"
-          type="tel"
+          labelName="vehicleRenewalDate"
+          type="date"
         />
-        <EmptyFieldErrorMessage message={errors.mobileNo?.message} />
+        <EmptyFieldErrorMessage message={errors.vehicleRenewalDate?.message} />
       </FormInputBox>
       <FormSubmittingSection isPending={isLoading} btnName={btnText} />
     </form>
   );
 }
 
-export default AddClientForm;
+export default AddVehicleForm;

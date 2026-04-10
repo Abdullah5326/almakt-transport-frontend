@@ -7,6 +7,7 @@ import { countItemsByStatus } from "../../utils/utils";
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { useState } from "react";
 
 function Trip() {
   const { tripsDurationFilter } = useSelector((state) => state.trip);
@@ -14,22 +15,35 @@ function Trip() {
     `last-${tripsDurationFilter}-trips`,
     () => getAllItems(`trips/last-${tripsDurationFilter}-trips`),
   );
+  const [tripsType, setTripsType] = useState("allTrips");
   if (isPending) return <LoadingSpinner />;
+  const pendingTrips = trips.filter((trip) => !trip.isCompleted);
+  const completedTrips = trips.filter((trip) => trip.isCompleted);
   return (
     <div className="lg:p-8 p-4">
       <PrimaryHeading>Trips</PrimaryHeading>
       <div className="flex flex-col lg:flex-row gap-3 items-start text-sm md:text-[16px] lg:items-center mt-6 mb-13 justify-between lg:pr-8">
         <div className="flex gap-2 text-xs md:text-md font-semibold">
-          <p className="bg-orange-400 text-white flex items-center px-3 rounded-sm">
-            All Orders
-          </p>
+          <TripStatusBox
+            name="All Trips"
+            quantity={trips.length}
+            onClick={() => setTripsType("allTrips")}
+            tripsType={tripsType}
+            boxType="allTrips"
+          />
           <TripStatusBox
             name="Completed"
-            quantity={countItemsByStatus(trips)}
+            quantity={completedTrips.length}
+            onClick={() => setTripsType("completedTrips")}
+            tripsType={tripsType}
+            boxType="completedTrips"
           />
           <TripStatusBox
             name="Pending"
-            quantity={trips.length - countItemsByStatus(trips)}
+            quantity={pendingTrips.length}
+            onClick={() => setTripsType("pendingTrips")}
+            tripsType={tripsType}
+            boxType="pendingTrips"
           />
         </div>
         <div>
@@ -37,7 +51,15 @@ function Trip() {
         </div>
       </div>
       <div className="lg:pr-8">
-        <Trips trips={trips} />
+        <Trips
+          trips={
+            tripsType === "allTrips"
+              ? trips
+              : tripsType === "pendingTrips"
+                ? pendingTrips
+                : completedTrips
+          }
+        />
       </div>
     </div>
   );
