@@ -15,8 +15,8 @@ import Modal from "./../../ui/Modal";
 function TripItem({ trip }) {
   const [showUpdateTripForm, setShowUpdateTripForm] = useState(false);
   const [tripCompleted, setTripCompleted] = useState(trip.isCompleted);
-  const { tripsDurationFilter } = useSelector((state) => state.trip);
-  const tripsQueryKey = `last-${tripsDurationFilter}-trips`;
+  const { tripsDurationType } = useSelector((state) => state.trip);
+  const tripsQueryKey = `trips-by-duration?duration=${tripsDurationType}`;
 
   const navigate = useNavigate();
   const { updateItem: updateTrip, isPending: isUpdatingTrip } = useUpdateItem(

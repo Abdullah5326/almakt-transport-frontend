@@ -3,17 +3,16 @@ import PrimaryHeading from "../../ui/PrimaryHeading";
 import TripDurationFilter from "../../ui/TripDurationFilter";
 import Trips from "./Trips";
 import TripStatusBox from "./TripStatusBox";
-import { countItemsByStatus } from "../../utils/utils";
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useState } from "react";
 
 function Trip() {
-  const { tripsDurationFilter } = useSelector((state) => state.trip);
+  const { tripsDurationType } = useSelector((state) => state.trip);
   const { data: trips, isPending } = useGetItems(
-    `last-${tripsDurationFilter}-trips`,
-    () => getAllItems(`trips/last-${tripsDurationFilter}-trips`),
+    `trips-by-duration?duration=${tripsDurationType}`,
+    () => getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
   );
   const [tripsType, setTripsType] = useState("allTrips");
   if (isPending) return <LoadingSpinner />;
