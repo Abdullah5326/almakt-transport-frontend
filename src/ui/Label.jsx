@@ -1,5 +1,3 @@
-import { HiOutlineDocumentChartBar } from "react-icons/hi2";
-
 function Label({ children, labelName }) {
   return (
     <label htmlFor={labelName} className="flex items-center gap-2">

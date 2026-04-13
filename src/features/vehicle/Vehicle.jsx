@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
@@ -6,13 +7,14 @@ import DriverListItem from "../driver/DriverListItem";
 import VehicleListItem from "./VehicleListItem";
 
 function Vehicle() {
+  const [showVehicleOperationMenu, setShowVehicleOperationMenu] =
+    useState(null);
   const { data: vehicles, isPending: isLoadingVehicles } = useGetItems(
     "vehicles",
     () => getAllItems("vehicles"),
   );
 
   if (isLoadingVehicles) return <LoadingSpinner />;
-  console.log(vehicles);
   return (
     <div className="lg:p-8 p-4">
       <div className="mb-10">
@@ -28,7 +30,13 @@ function Vehicle() {
         </div>
         <ul className="divide-y divide-stone-100 overflow-y-auto h-80 lg:h-[90vh]">
           {vehicles?.map((vehicle, i) => (
-            <VehicleListItem vehicle={vehicle} no={i} key={vehicle._id} />
+            <VehicleListItem
+              vehicle={vehicle}
+              no={i}
+              key={vehicle._id}
+              setShowVehicleOperationMenu={setShowVehicleOperationMenu}
+              showVehicleOperationMenu={showVehicleOperationMenu}
+            />
           ))}
         </ul>
       </div>

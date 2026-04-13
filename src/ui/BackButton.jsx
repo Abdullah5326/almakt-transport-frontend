@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function BackButton({ path }) {
   const navigate = useNavigate();
-  console.log(path);
   return (
     <div className="flex justify-start mb-8">
       <button

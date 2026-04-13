@@ -2,7 +2,9 @@
 const CLOUD_URL = "https://almakt-transport-backend.onrender.com/api/v1";
 
 export async function getAllItems(endpoint) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}`);
+  const res = await fetch(`${CLOUD_URL}/${endpoint}`, {
+    credentials: "include",
+  });
 
   const data = await res.json();
   if (!res.ok) throw new Error("There is an error in fetching trips");
@@ -17,9 +19,9 @@ export async function addItem(endpoint, item) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
   const data = await res.json();
-  console.log(data, "api");
   if (!res.ok)
     throw new Error(
       "There is an error in adding " +
@@ -33,23 +35,24 @@ export async function addItem(endpoint, item) {
 }
 
 export async function getItem(endpoint, id) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}/${id}`);
+  const res = await fetch(`${CLOUD_URL}/${endpoint}/${id}`, {
+    credentials: "include",
+  });
 
   if (!res.ok) throw new Error("There is error in fetching item");
 
   const data = await res.json();
-
   return data.data.data;
 }
 
 export async function updateItem(updateData, endpoint) {
-  console.log(updateData);
   const res = await fetch(`${CLOUD_URL}/${endpoint}/${updateData._id}`, {
     method: "PATCH",
     body: JSON.stringify(updateData),
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   });
 
   const data = await res.json();
@@ -62,6 +65,7 @@ export async function updateItem(updateData, endpoint) {
 export async function deleteItem(resourceName, id) {
   const res = await fetch(`${CLOUD_URL}/${resourceName}/${id}`, {
     method: "DELETE",
+    credentials: "include",
   });
   if (!res.ok) throw new Error("There is an error in deleting item");
 

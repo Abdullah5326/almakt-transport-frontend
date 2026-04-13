@@ -1,7 +1,6 @@
 import { HiMenu, HiSearch, HiX } from "react-icons/hi";
 import { HiOutlineMoon, HiPlus } from "react-icons/hi2";
 import OperationsTripForm from "../features/trip/addTripForm/OperationsTripForm";
-import { useAddTrip } from "../features/trip/useAddTrip";
 import { useState } from "react";
 import AddMemberButtons from "./AddMemberButtons";
 import Modal from "./Modal";
@@ -11,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useAddItem } from "../hooks/useAddItem";
 import { addItem } from "../services/apiServices";
 import AddVehicleForm from "../features/vehicle/AddVehicleForm";
+import AddMaintenanceAmountForm from "../features/maintenance/AddMaintenanceAmountForm";
 
 function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
@@ -18,7 +18,12 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const [showAddClientForm, setShowAddClientForm] = useState(false);
   const [showAddDriverForm, setShowAddDriverForm] = useState(false);
   const [showAddVehicleForm, setShowAddVehicleForm] = useState(false);
-  const { addTrip, isAddingTrip } = useAddTrip();
+  const [showAddMaintenanceForm, setShowAddMaintenanceForm] = useState(false);
+  // const { addTrip, isAddingTrip } = useAddTrip();
+  const { addItem: addTrip, isPending: isAddingTrip } = useAddItem(
+    addItem,
+    "trips",
+  );
   const { addItem: addClient, isPending: isAddingClient } = useAddItem(
     addItem,
     "clients",
@@ -31,6 +36,8 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
     addItem,
     "vehicles",
   );
+  const { addItem: addMaintenance, isPending: isAddingMaintenance } =
+    useAddItem(addItem, "maintenances");
   return (
     <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
       <div className="flex items-center justify-center w-14 lg:w-60 mr-4 border-r border-stone-300 h-full ">
@@ -38,8 +45,8 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
           to="/"
           className={`uppercase   text-orange-500 hidden  lg:flex text-1xl font-bold  items-center gap-2 `}
         >
-          <span className={``}>Al-makt</span>
-          <span className="text-2xl flex items-center ">🚛</span>
+          <span className={``}>Al Makt</span>
+          <span className="text-2xl flex items-center  ">🚛</span>
         </Link>
         <span className="cursor-pointer lg:hidden">
           {!showSmallNav && (
@@ -83,6 +90,7 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
             </button>
             {showAddMemberContainer && (
               <AddMemberButtons
+                setAddMemberContainer={setAddMemberContainer}
                 showAddTripForm={() => {
                   setShowAddTripForm(true);
                   setAddMemberContainer((show) => !show);
@@ -97,6 +105,10 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
                 }}
                 showAddVehicleForm={() => {
                   setShowAddVehicleForm(true);
+                  setAddMemberContainer(false);
+                }}
+                showAddMaintenanceForm={() => {
+                  setShowAddMaintenanceForm(true);
                   setAddMemberContainer(false);
                 }}
               />
@@ -149,6 +161,18 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
                 operationFn={addVehicle}
                 isLoading={isAddingVehicle}
                 closeForm={() => setShowAddVehicleForm(false)}
+              />
+            </Modal>
+          )}
+          {showAddMaintenanceForm && (
+            <Modal closeForm={() => setShowAddMaintenanceForm(false)}>
+              <AddMaintenanceAmountForm
+                btnText="Add Maintenance"
+                name="Add Maintenance Amount"
+                description="Fill the following details about the money spent on vehicle"
+                operationFn={addMaintenance}
+                isLoading={isAddingMaintenance}
+                closeForm={() => setShowAddMaintenanceForm(false)}
               />
             </Modal>
           )}

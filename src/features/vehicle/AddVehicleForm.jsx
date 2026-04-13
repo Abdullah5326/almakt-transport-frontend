@@ -22,7 +22,6 @@ function AddVehicleForm({
   } = useForm({ defaultValues: defaultValues || {} });
 
   function onSubmit(data) {
-    console.log(data);
     if (!data) return;
     operationFn(data, {
       onSuccess: () => {

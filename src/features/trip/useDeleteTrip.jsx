@@ -7,14 +7,13 @@ import { useParams } from "react-router-dom";
 export function useDeleteTrip() {
   const queryClient = useQueryClient();
   const { clientId } = useParams();
-  const { tripsDurationFilter } = useSelector((state) => state.trip);
-  console.log(tripsDurationFilter);
+  const { tripsDurationType } = useSelector((state) => state.trip);
   const { mutate: deleteTrip, isPending: isDeletingTrip } = useMutation({
     mutationFn: deleteTripApi,
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [`last-${tripsDurationFilter}-trips`],
+        queryKey: [`trips-by-duration?duration=${tripsDurationType}`],
       });
       if (clientId) queryClient.invalidateQueries(["clients", clientId]);
       toast.success("Successfully deleted the trip");

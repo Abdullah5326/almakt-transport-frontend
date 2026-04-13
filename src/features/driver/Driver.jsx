@@ -3,11 +3,13 @@ import { getAllItems } from "../../services/apiServices";
 import PrimaryHeading from "../../ui/PrimaryHeading";
 import DriverListItem from "./DriverListItem";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { useState } from "react";
 
 function Driver() {
   const { data: drivers, isPending } = useGetItems("drivers", () =>
     getAllItems("drivers"),
   );
+  const [showOperationDriverId, setShowOperationDriverId] = useState(null);
 
   if (isPending) return <LoadingSpinner />;
   return (
@@ -24,12 +26,18 @@ function Driver() {
             <p> Flat No</p>
             <p className="hidden md:block">Vehicle Renewal Date</p>
             <p className="hidden md:block">Id Card Expiry Date</p>
-            <p className="hidden md:block">Call No</p>
+            <p className="hidden md:block">Credit</p>
             <p>Status</p>
           </div>
           <ul className="divide-y divide-stone-100 overflow-y-auto h-s lg:h-[90vh]">
             {drivers.map((driver, i) => (
-              <DriverListItem driver={driver} no={i} key={driver.id} />
+              <DriverListItem
+                driver={driver}
+                no={i}
+                key={driver.id}
+                showOperationDriverId={showOperationDriverId}
+                setShowOperationDriverId={setShowOperationDriverId}
+              />
             ))}
           </ul>
         </div>

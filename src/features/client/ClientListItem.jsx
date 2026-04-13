@@ -1,4 +1,4 @@
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { HiDotsVertical, HiOutlineDotsHorizontal } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import OperationMenu from "../../ui/OperationMenu";
 import { useDeleteItem } from "../../hooks/useDeleteItem";
@@ -9,7 +9,12 @@ import AddClientForm from "./AddClientForm";
 import Modal from "../../ui/Modal";
 import { useUpdateItem } from "../../hooks/useUpdateItem";
 
-function ClientListItem({ client, no }) {
+function ClientListItem({
+  client,
+  no,
+  setShowOperationMenuClientId,
+  showOperationsMenuClientId,
+}) {
   const queryKey = "clients";
   const [showUpdateClientForm, setShowUpdateClientForm] = useState(false);
   const navigate = useNavigate();
@@ -38,12 +43,29 @@ function ClientListItem({ client, no }) {
             failColor: "yellow",
           }}
         />
-        <OperationMenu
-          disabledValue={isDeletingClient}
-          itemId={client._id}
-          operationDeleteFn={deleteClient}
-          toggleEditForm={setShowUpdateClientForm}
-        />
+        <div className="relative">
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              if (showOperationsMenuClientId)
+                return setShowOperationMenuClientId(null);
+
+              setShowOperationMenuClientId(client._id);
+            }}
+          >
+            <HiDotsVertical />
+          </span>
+          {showOperationsMenuClientId === client._id && (
+            <OperationMenu
+              disabledValue={isDeletingClient}
+              itemId={client._id}
+              operationDeleteFn={deleteClient}
+              toggleEditForm={setShowUpdateClientForm}
+              setOperationId={setShowOperationMenuClientId}
+            />
+          )}
+        </div>
         {showUpdateClientForm && (
           <Modal closeForm={() => setShowUpdateClientForm(false)}>
             <AddClientForm

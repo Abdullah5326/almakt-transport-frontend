@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGetItems } from "../../hooks/useGetItems";
 import { getAllItems } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
@@ -5,6 +6,8 @@ import PrimaryHeading from "../../ui/PrimaryHeading";
 import ClientListItem from "./ClientListItem";
 
 function Client() {
+  const [showOperationsMenuClientId, setShowOperationMenuClientId] =
+    useState(null);
   const { data: clients, isPending } = useGetItems("clients", () =>
     getAllItems("clients"),
   );
@@ -26,7 +29,13 @@ function Client() {
           </div>
           <ul className="divide-y divide-stone-100 overflow-y-auto h-[90vh]">
             {clients.map((client, i) => (
-              <ClientListItem client={client} no={i} key={client.id} />
+              <ClientListItem
+                client={client}
+                no={i}
+                key={client.id}
+                showOperationsMenuClientId={showOperationsMenuClientId}
+                setShowOperationMenuClientId={setShowOperationMenuClientId}
+              />
             ))}
           </ul>
         </div>

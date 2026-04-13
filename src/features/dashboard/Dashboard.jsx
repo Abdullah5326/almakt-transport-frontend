@@ -11,6 +11,7 @@ import LoadingSpinner from "../../ui/LoadingSpinner";
 import { formatCurrency } from "../../utils/utils";
 import { useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useUser } from "../authentication/useUser";
 
 function Dashboard() {
   const tripListRef = useRef(null);
@@ -20,14 +21,15 @@ function Dashboard() {
     `trips-by-duration?duration=${tripsDurationType}`,
     () => getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
   );
+  const { data: user, isPending: isLoadingUser } = useUser();
   const [showAllTrips, setShowAllTrips] = useState(true);
   const { data: durationalTrips, isPending: isLoadingTrips } = useGetItems(
     "durational-trips",
     () => getAllItems(`trips/durational-trips`),
   );
 
-  if (isPending || isLoadingTrips) return <LoadingSpinner />;
-  const amountWithDriversTrips = allTrips.filter(
+  if (isPending || isLoadingTrips || isLoadingUser) return <LoadingSpinner />;
+  const amountWithDriversTrips = allTrips?.filter(
     (trip) => trip.paidTo === "driver",
   );
 
@@ -41,13 +43,12 @@ function Dashboard() {
       setShowAllTrips(show);
     }
   };
-
   return (
     <div className="lg:px-6 px-2  relative">
       <div className="mb-6 flex text-xs justify-between pt-4 lg:pr-30 lg:p-8 sm:gap-4 lg:gap-8">
         <div>
           <PrimaryHeading>Dashboard</PrimaryHeading>
-          <p className="text-stone-500 text-xs">Welcome back Atif</p>
+          <p className="text-stone-500 text-xs">Welcome back {user?.name}</p>
         </div>
         <TripDurationFilter />
       </div>

@@ -10,6 +10,7 @@ function SelectInput({
   name,
   value,
 }) {
+  console.log(options);
   return (
     <Controller
       name={name}

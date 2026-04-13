@@ -12,13 +12,24 @@ import TripDetails from "./features/trip/TripDetails";
 import ClientDetails from "./features/client/ClientDetails";
 import DriverDetails from "./features/driver/DriverDetails";
 import Vehicle from "./features/vehicle/Vehicle";
+import Login from "./pages/Login";
+import AuthChecker from "./ui/ProtectedRoute";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import Credit from "./pages/Maintenance";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Layout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="/clients" element={<Client />} />
             <Route path="/clients/:clientId" element={<ClientDetails />} />
@@ -27,7 +38,9 @@ function App() {
             <Route path="/trips" element={<Trip />} />
             <Route path="/trips/:tripId" element={<TripDetails />} />
             <Route path="/vehicles" element={<Vehicle />} />
+            <Route path="/maintenance" element={<Credit />} />
           </Route>
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Toaster />

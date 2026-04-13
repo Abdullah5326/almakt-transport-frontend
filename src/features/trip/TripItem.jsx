@@ -7,12 +7,12 @@ import { deleteItem } from "../../services/apiServices";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { HiCheck, HiOutlineClock } from "react-icons/hi2";
-import StatusTag from "../../ui/StatusTag";
 import OperationTripForm from "./addTripForm/OperationsTripForm";
 import { updateItem as updateTripApi } from "../../services/apiServices";
 import Modal from "./../../ui/Modal";
+import { HiDotsVertical } from "react-icons/hi";
 
-function TripItem({ trip }) {
+function TripItem({ trip, showOperationTripId, setShowOperationTripId }) {
   const [showUpdateTripForm, setShowUpdateTripForm] = useState(false);
   const [tripCompleted, setTripCompleted] = useState(trip.isCompleted);
   const { tripsDurationType } = useSelector((state) => state.trip);
@@ -116,15 +116,30 @@ function TripItem({ trip }) {
             )}
           </span>
         </p>
-        <OperationMenu
-          disableDeleteValue={isDeletingTrip}
-          itemId={trip._id}
-          operationDeleteFn={deleteTrip}
-          operationUpdateFn={updateTrip}
-          item={trip}
-          toggleEditForm={setShowUpdateTripForm}
-          disableUpdateValue={isUpdatingTrip}
-        />
+        <div>
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              if (showOperationTripId) return setShowOperationTripId(null);
+              setShowOperationTripId(trip._id);
+            }}
+          >
+            <HiDotsVertical />{" "}
+          </span>
+          {showOperationTripId === trip._id && (
+            <OperationMenu
+              disableDeleteValue={isDeletingTrip}
+              itemId={trip._id}
+              operationDeleteFn={deleteTrip}
+              operationUpdateFn={updateTrip}
+              item={trip}
+              toggleEditForm={setShowUpdateTripForm}
+              disableUpdateValue={isUpdatingTrip}
+              setOperationId={setShowOperationTripId}
+            />
+          )}
+        </div>
         {showUpdateTripForm && (
           <Modal closeForm={() => setShowUpdateTripForm(false)}>
             <OperationTripForm

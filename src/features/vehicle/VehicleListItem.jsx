@@ -5,8 +5,14 @@ import { deleteItem, updateItem } from "../../services/apiServices";
 import { useState } from "react";
 import AddVehicleForm from "./AddVehicleForm";
 import { useUpdateItem } from "../../hooks/useUpdateItem";
+import { HiDotsVertical } from "react-icons/hi";
 
-function VehicleListItem({ vehicle, no }) {
+function VehicleListItem({
+  vehicle,
+  no,
+  setShowVehicleOperationMenu,
+  showVehicleOperationMenu,
+}) {
   const { updateItem: updateVehicle, isPending: isUpdatingVehicle } =
     useUpdateItem("vehicles", updateItem, "vehicles");
   const [showUpdateVehicleForm, setShowUpdateVehicle] = useState(false);
@@ -19,14 +25,30 @@ function VehicleListItem({ vehicle, no }) {
       <p>
         <span>{vehicle.flatNo || "LHR 400"}</span>
       </p>
-      <div className="flex  justify-around">
+      <div className="flex justify-between  ">
         <p>{new Date(vehicle.vehicleRenewalDate).toLocaleDateString()}</p>
-        <OperationMenu
-          operationDeleteFn={deleteVehicle}
-          itemId={vehicle._id}
-          disabledValue={isDeletingVehicle}
-          toggleEditForm={setShowUpdateVehicle}
-        />
+        <div className="relative">
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              if (showVehicleOperationMenu)
+                return setShowVehicleOperationMenu(null);
+              setShowVehicleOperationMenu(vehicle._id);
+            }}
+          >
+            <HiDotsVertical />
+          </span>
+          {showVehicleOperationMenu === vehicle._id && (
+            <OperationMenu
+              operationDeleteFn={deleteVehicle}
+              itemId={vehicle._id}
+              disabledValue={isDeletingVehicle}
+              toggleEditForm={setShowUpdateVehicle}
+              setOperationId={setShowVehicleOperationMenu}
+            />
+          )}
+        </div>
         {showUpdateVehicleForm && (
           <Modal closeForm={() => setShowUpdateVehicle(false)}>
             <AddVehicleForm

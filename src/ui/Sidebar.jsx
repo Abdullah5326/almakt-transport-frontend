@@ -85,17 +85,17 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               <span>
                 <HiOutlineWrenchScrewdriver className="h-5 w-5" />
               </span>
-            </SidebarItem>
+            </SidebarItem> */}
             <SidebarItem
-              to="/"
-              itemName="Finance"
+              to="/maintenance"
+              itemName="Maintenance"
               showSmallNav={showSmallNav}
               onClick={() => setShowSmallNav(false)}
             >
               <span>
                 <HiOutlineDocumentCurrencyDollar className="h-5 w-5" />
               </span>
-            </SidebarItem> */}
+            </SidebarItem>
           </div>
         </div>
       </div>

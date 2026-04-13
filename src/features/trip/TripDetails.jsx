@@ -7,7 +7,7 @@ import {
   HiOutlineUser,
   HiOutlineUsers,
 } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { GoDotFill } from "react-icons/go";
 import { useTrip } from "./useTrip";
@@ -15,12 +15,19 @@ import { parseDate } from "../../utils/utils";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import StatusTag from "../../ui/StatusTag";
 import TripInvoiceDownloadBtn from "../../ui/TripInvoiceDownloadBtn";
+import { useGetItem } from "../../hooks/useGetItem";
+import { getItem } from "../../services/apiServices";
 
 function TripDetails() {
-  const { trip, isLoadingTrip } = useTrip();
+  const { tripId } = useParams();
+  const { data: trip, isPending: isLoadingTrip } = useGetItem(
+    "trip",
+    getItem,
+    tripId,
+    "trips",
+  );
   const navigate = useNavigate();
   if (isLoadingTrip) return <LoadingSpinner />;
-  console.log(trip);
   return (
     <div>
       <div className=" py-4 px-2 lg:pl-12 lg:pr-30 flex justify-between items-center bg-white">

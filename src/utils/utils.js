@@ -14,11 +14,11 @@ export function countItemsByStatus(items, statusName) {
 }
 
 export function formatCurrency(amount) {
+  if (!amount) return "-";
   const formatAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "AED",
   });
+  console.log(formatAmount.format(amount));
   return formatAmount.format(amount);
 }
-
-console.log(formatCurrency(50));

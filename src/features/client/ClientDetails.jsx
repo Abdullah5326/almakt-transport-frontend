@@ -13,12 +13,20 @@ import DetailsStatisticsBox from "../../ui/DetailsStatisticsBox";
 import { PiPath } from "react-icons/pi";
 import BackButton from "../../ui/BackButton";
 import LoadingSpinner from "../../ui/LoadingSpinner";
+import { useGetItem } from "../../hooks/useGetItem";
+import { getItem } from "../../services/apiServices";
+import { useParams } from "react-router-dom";
 
 function ClientDetails() {
-  const { client, isLoadingClient } = useClient();
+  const { clientId } = useParams();
+  const { data: client, isPending: isLoadingClient } = useGetItem(
+    "client",
+    getItem,
+    clientId,
+    "clients",
+  );
 
   if (isLoadingClient) return <LoadingSpinner />;
-  console.log(client.trips);
   return (
     <div className="lg:p-8 p-2 ">
       {/* Back button */}

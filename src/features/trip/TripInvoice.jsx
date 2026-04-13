@@ -2,8 +2,6 @@ import StatusTag from "../../ui/StatusTag";
 import { parseDate } from "../../utils/utils";
 
 function TripInvoice({ trip }) {
-  console.log(trip);
-
   const invoiceNumber = `INV-${new Date().getFullYear()}-${trip._id.slice(-5)}`;
   return (
     <div className=" bg-white">

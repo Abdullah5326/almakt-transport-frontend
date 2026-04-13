@@ -16,7 +16,6 @@ function OperationTripForm({
   closeForm,
   submitBtnName,
 }) {
-  console.log(isPending);
   const today = new Date().toISOString().split("T")[0];
   const {
     register,
@@ -41,7 +40,6 @@ function OperationTripForm({
         },
   });
   function onSubmit(data) {
-    console.log("SUBMIT");
     if (data)
       operationFn(data, {
         onSuccess: () => {
