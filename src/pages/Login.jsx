@@ -24,7 +24,7 @@ function Login() {
   return (
     <div className="flex flex-col bg-stone-50 items-center justify-center h-screen">
       <div className="flex relative flex-col ">
-        <img src="public/images/logo.png" alt="logo" className="w-70  " />
+        <img src="/images/logo.png" alt="logo" className="w-70  " />
         <div className="absolute bottom-3">
           <h1 className="text-3xl font-bold">Almakt Transport</h1>
         </div>
