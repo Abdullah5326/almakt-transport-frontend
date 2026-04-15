@@ -20,7 +20,7 @@ function Client() {
           <p>Here is your business client</p>
         </div>
         <div className="rounded-2xl bg-white h-screen border-2 border-stone-200 text-xs md:text-[15px]">
-          <div className="border-b-2 border-stone-200 grid grid-cols-[1.5fr_1fr_2fr] md:grid-cols-[5rem_1fr_1fr_1fr_1fr] py-4 rounded-t-lg px-1 bg-orange-400 text-white">
+          <div className="border-b-2 border-stone-200 grid grid-cols-[1.5fr_1fr_2fr] md:grid-cols-[5rem_1fr_1fr_1fr_1fr] py-4 rounded-t-lg px-1 bg-orange-400 text-white font-semibold">
             <p className="hidden md:block">S.No</p>
             <p>Name</p>
             <p className="">Trips</p>

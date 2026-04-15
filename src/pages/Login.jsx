@@ -22,11 +22,13 @@ function Login() {
     login(data);
   }
   return (
-    <div className="flex flex-col bg-stone-50 items-center justify-center h-screen">
-      <div className="flex relative flex-col ">
+    <div className="  absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] h-screen">
+      <div className="flex relative flex-col mb-25 items-center bg-white ">
         <img src="/images/logo.png" alt="logo" className="w-70  " />
-        <div className="absolute bottom-3">
-          <h1 className="text-3xl font-bold">Almakt Transport</h1>
+        <div className="absolute top-42">
+          <h1 className="text-3xl font-bold text-center">
+            MANARAT AL KHAN GEN TRANSPORT LLC
+          </h1>
         </div>
       </div>
       <form
@@ -35,7 +37,7 @@ function Login() {
       >
         <div>
           <h2 className="text-2xl mb-2 font-bold">Welcome</h2>
-          <p className="text-stone-500">Sign in to your account</p>
+          <p className="text-stone-500 mb-8">Sign in to your account</p>
         </div>
         <FormInputBox>
           <Label>Email</Label>

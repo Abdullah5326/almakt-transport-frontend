@@ -76,7 +76,7 @@ function AddDriverForm({
             placeholder="Select Vehicle"
             options={vehicles}
             name="vehicle"
-            optionName="name"
+            optionName="flatNo"
             value="_id"
           />
         )}
@@ -98,13 +98,7 @@ function AddDriverForm({
         </FormInputBox>
         <FormInputBox>
           <Label labelName="Email"></Label>
-          {/* <Input
-            type="email"
-            register={register}
-            placeholder="abdullah@example.com"
-            labelName="email"
-            name="email"
-          /> */}
+
           <input
             type="email"
             register={"email"}

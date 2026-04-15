@@ -69,7 +69,7 @@ function AddMaintenanceAmountForm({
         {!isLoadingVehicles && (
           <SelectInput
             options={vehicles}
-            optionName="name"
+            optionName="flatNo"
             value={"_id"}
             placeholder={"Select Vehicle"}
             control={control}

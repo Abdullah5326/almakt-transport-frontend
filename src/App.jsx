@@ -16,6 +16,8 @@ import Login from "./pages/Login";
 import AuthChecker from "./ui/ProtectedRoute";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Credit from "./pages/Maintenance";
+import SeeDetails from "./pages/SeeDetails";
+import Maintenance from "./pages/Maintenance";
 
 function App() {
   return (
@@ -38,7 +40,8 @@ function App() {
             <Route path="/trips" element={<Trip />} />
             <Route path="/trips/:tripId" element={<TripDetails />} />
             <Route path="/vehicles" element={<Vehicle />} />
-            <Route path="/maintenance" element={<Credit />} />
+            <Route path="/maintenance" element={<Maintenance />} />
+            <Route path="/see-details" element={<SeeDetails />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />

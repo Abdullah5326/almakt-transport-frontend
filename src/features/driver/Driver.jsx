@@ -20,10 +20,10 @@ function Driver() {
           <p>Here is your business drivers</p>
         </div>
         <div className="rounded-2xl bg-white h-100 lg:h-screen border-2 border-stone-200">
-          <div className="border-b-2 border-stone-200 grid  md:grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] py-4 rounded-t-lg px-2 bg-orange-400">
+          <div className="border-b-2 border-stone-200 grid  md:grid-cols-[5rem_1fr_1fr_1fr_1fr_1fr_1fr] grid-cols-[1fr_1fr_1fr] py-4 rounded-t-lg px-2 bg-orange-400 text-white font-semibold">
             <p className="hidden md:block">S.No</p>
             <p>Name</p>
-            <p> Flat No</p>
+            <p>Vehicle Flat No</p>
             <p className="hidden md:block">Vehicle Renewal Date</p>
             <p className="hidden md:block">Id Card Expiry Date</p>
             <p className="hidden md:block">Credit</p>

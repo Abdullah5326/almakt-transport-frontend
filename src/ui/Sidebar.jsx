@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import {
+  HiOutlineChartBar,
   HiOutlineHome,
   HiOutlineMap,
   HiOutlineTruck,
@@ -76,16 +77,6 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
                 <HiOutlineTruck className="h-5 w-5" />
               </span>
             </SidebarItem>
-            {/* <SidebarItem
-              to="/"
-              itemName="Maintenance"
-              showSmallNav={showSmallNav}
-              onClick={() => setShowSmallNav(false)}
-            >
-              <span>
-                <HiOutlineWrenchScrewdriver className="h-5 w-5" />
-              </span>
-            </SidebarItem> */}
             <SidebarItem
               to="/maintenance"
               itemName="Maintenance"
@@ -93,9 +84,19 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineDocumentCurrencyDollar className="h-5 w-5" />
+                <HiOutlineWrenchScrewdriver className="h-5 w-5" />
               </span>
             </SidebarItem>
+            <Link
+              to="see-details"
+              className="mx-2 text-lg hover:bg-orange-600 bg-orange-500 text-white  flex gap-1 items-center rounded-lg py-1 px-2 cursor-pointer transition-all duration-300"
+              onClick={() => setShowSmallNav(false)}
+            >
+              <span>
+                <HiOutlineChartBar />
+              </span>
+              <span className={`hidden lg:block`}>See Details</span>
+            </Link>
           </div>
         </div>
       </div>
