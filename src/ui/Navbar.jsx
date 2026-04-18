@@ -39,11 +39,11 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
   const { addItem: addMaintenance, isPending: isAddingMaintenance } =
     useAddItem(addItem, "maintenances");
   return (
-    <nav className="bg-white h-14  items-center  flex justify-between pr-4 lg:pr-8 border-b border-stone-300 ">
-      <div className="flex items-center justify-center w-14 lg:w-60 mr-4 border-r border-stone-300 h-full ">
+    <nav className="bg-white h-16  items-center  flex justify-between pr-4 lg:pr-8  border-stone-300 ">
+      <div className=" w-14 lg:w-60 mr-4  h-full ">
         <Link
           to="/"
-          className={`uppercase   text-orange-500 hidden  lg:flex text-1xl font-bold  items-center gap-2 `}
+          className={`uppercase  justify-center border-b border-orange-300 bg-orange-400 hidden h-full text-white  lg:flex text-1xl font-bold  items-center gap-2 `}
         >
           <span className={``}>Al Makt</span>
           <span className="text-2xl flex items-center  ">🚛</span>
@@ -60,14 +60,14 @@ function Navbar({ showSmallNav = true, setShowSmallNav }) {
           )}
         </span>
       </div>
-      <div className="relative max-w-80 w-full">
+      <div className="relative max-w-100 w-full">
         <input
           type="text"
-          className="border  w-full  border-stone-200 pl-2 lg:pl-8 p-1 focus:outline-orange-300 rounded-lg"
+          className="border  w-full  border-stone-200 pl-2 lg:pl-4 py-2 focus:outline-orange-300 rounded-full"
           placeholder="Search a trip"
         />
-        <span className="absolute top-[50%] transform -translate-y-[50%] right-1">
-          <HiSearch className="text-stone-400" />
+        <span className="absolute top-[50%] transform -translate-y-[50%] bg-orange-400 px-5  h-full flex items-center right-0 rounded-r-full">
+          <HiSearch className="text-stone-50" />
         </span>
       </div>
 

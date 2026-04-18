@@ -1,4 +1,3 @@
-import { Link, NavLink } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 import {
   HiOutlineChartBar,
@@ -7,22 +6,18 @@ import {
   HiOutlineTruck,
   HiOutlineUsers,
 } from "react-icons/hi";
-import {
-  HiOutlineDocumentCurrencyDollar,
-  HiOutlineWrenchScrewdriver,
-} from "react-icons/hi2";
 import { TbSteeringWheelFilled } from "react-icons/tb";
 
 function Sidebar({ showSmallNav, setShowSmallNav }) {
   return (
     <aside
-      className={`w-13 lg:w-70 absolute lg:relative border border-stone-200 bg-white h-screen z-3`}
+      className={`w-13 lg:w-[17.66rem] absolute lg:relative bg-orange-400 text-white h-screen z-3`}
       onClick={() => setShowSmallNav(false)}
     >
       <div className=" w-full">
-        <div className="pt-5">
+        <div className="pt-4.5">
           <p
-            className={`text-xs text-stone-400 uppercase mb-2 pl-4 hidden lg:block`}
+            className={`text-xs text-orange-800 uppercase mb-2 pl-4 hidden lg:block`}
           >
             General
           </p>
@@ -34,7 +29,7 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineHome className="h-5 w-5" />
+                <HiOutlineHome className="h-4.5 w-4.5" />
               </span>
             </SidebarItem>
             <SidebarItem
@@ -44,7 +39,7 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineMap className="h-5 w-5" />
+                <HiOutlineMap className="h-4.5 w-4.5" />
               </span>
             </SidebarItem>
             <SidebarItem
@@ -54,7 +49,7 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineUsers className="h-5 w-5" />
+                <HiOutlineUsers className="h-4.5 w-4.5" />
               </span>
             </SidebarItem>
             <SidebarItem
@@ -64,7 +59,7 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <TbSteeringWheelFilled className="h-5 w-5" />
+                <TbSteeringWheelFilled className="h-4.5 w-4.5" />
               </span>
             </SidebarItem>
             <SidebarItem
@@ -84,19 +79,20 @@ function Sidebar({ showSmallNav, setShowSmallNav }) {
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineWrenchScrewdriver className="h-5 w-5" />
+                <HiOutlineTruck className="h-5 w-5" />
               </span>
             </SidebarItem>
-            <Link
-              to="see-details"
-              className="mx-2 text-lg hover:bg-orange-600 bg-orange-500 text-white  flex gap-1 items-center rounded-lg py-1 px-2 cursor-pointer transition-all duration-300"
+
+            <SidebarItem
+              to="/see-analytics"
+              itemName="Analytics"
+              showSmallNav={showSmallNav}
               onClick={() => setShowSmallNav(false)}
             >
               <span>
-                <HiOutlineChartBar />
+                <HiOutlineChartBar className="h-4.5 w-4.5" />
               </span>
-              <span className={`hidden lg:block`}>See Details</span>
-            </Link>
+            </SidebarItem>
           </div>
         </div>
       </div>

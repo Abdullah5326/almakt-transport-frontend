@@ -30,7 +30,6 @@ function AddClientForm({
       _id: defaultValues._id,
       creditAmount: data.creditAmount,
     };
-    console.log(creditAmountData);
     if (!data || isLoading) return;
     updateDriver(creditAmountData, {
       onSuccess: () => {

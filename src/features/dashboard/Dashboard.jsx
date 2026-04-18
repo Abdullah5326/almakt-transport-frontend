@@ -12,7 +12,7 @@ import { formatCurrency } from "../../utils/utils";
 import { useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useUser } from "../authentication/useUser";
-
+import TripFilterType from "../../ui/TripFilterType";
 function Dashboard() {
   const tripListRef = useRef(null);
   const { scrollableContainer } = useOutletContext();
@@ -44,13 +44,13 @@ function Dashboard() {
     }
   };
   return (
-    <div className="lg:px-6 px-2  relative">
-      <div className="mb-6 flex text-xs justify-between pt-4 lg:pr-30 lg:p-8 sm:gap-4 lg:gap-8">
+    <div className="lg:px-8 px-2 lg:pt-6 relative">
+      <div className="mb-6 flex text-xs justify-between pt-4   sm:gap-4 lg:gap-8">
         <div>
-          <PrimaryHeading>Dashboard</PrimaryHeading>
+          <h1 className="text-4xl font-bold">Dashboard</h1>
           <p className="text-stone-500 text-xs">Welcome back {user?.name}</p>
         </div>
-        <TripDurationFilter />
+        <TripFilterType />
       </div>
 
       <div className="flex flex-col lg:flex-row items-center gap-2 mb-12">
@@ -78,9 +78,11 @@ function Dashboard() {
           onClick={() => scrollToTrips(false)}
         />
       </div>
-      <div className="flex flex-col lg:flex-row gap-30 items-center mb-15">
+      <div className="  py-4 gap-60 flex items-center justify-between rounded-lg mb-15 w-full">
         {/* <Chart /> */}
+
         <BarChartUI data={durationalTrips} />
+        {/* <PieChartInGrid /> */}
       </div>
       <div ref={tripListRef}>
         <PrimaryHeading>Recent Trips</PrimaryHeading>

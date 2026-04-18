@@ -7,13 +7,14 @@
 # Things need to add
 
 - In trip model add the attribute of deadline and add it to ui ✅
-- remove the earn money from driver and add basic salary
-- Add the feature of importing details of trips
-- Add the car flat no and write the vechical name in the braces
+- remove the earn money from driver and add basic salary ✅
+- Add the feature of importing details of trips ✅
+- Add the car flat no and write the vechical name in the braces ✅
 - Add the basic salary attribute to the driver model. ✅
-- ADd the feature that in driver tab we can the sim from one driver to another
-- Add status to driver tab
+- ADd the feature that in driver tab we can the sim from one driver to another ✅
+- Add status to driver tab ✅
 - When we search any month of trips in driver tab we can see the trips of that month
+- When we click on dots it open the operation menu but its position is awkward so fix it
 
 # Personal Suggestions
 

@@ -33,7 +33,7 @@ function ClientListItem({
         {client.trips.length > 0 ? client.trips.length : "New"}
       </p>
       <p className="hidden md:block"> {client.mobileNo}</p>
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center pr-8 ">
         <StatusTag
           value={false}
           options={{

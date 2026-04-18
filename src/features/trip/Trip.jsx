@@ -4,15 +4,25 @@ import TripDurationFilter from "../../ui/TripDurationFilter";
 import Trips from "./Trips";
 import TripStatusBox from "./TripStatusBox";
 import { useGetItems } from "../../hooks/useGetItems";
-import { getAllItems } from "../../services/apiServices";
+import { addItem, getAllItems } from "../../services/apiServices";
 import LoadingSpinner from "../../ui/LoadingSpinner";
 import { useState } from "react";
+import ButtonAddMember from "../../ui/ButtonAddMember";
+import Modal from "../../ui/Modal";
+import OperationTripForm from "./addTripForm/OperationsTripForm";
+import { useAddItem } from "../../hooks/useAddItem";
+import PrimaryButton from "../../ui/PrimaryButton";
 
 function Trip() {
+  const [showAddTripForm, setShowAddTripForm] = useState(false);
   const { tripsDurationType } = useSelector((state) => state.trip);
-  const { data: trips, isPending } = useGetItems(
-    `trips-by-duration?duration=${tripsDurationType}`,
-    () => getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
+  const queryKey = `trips`;
+  const { data: trips, isPending } = useGetItems(queryKey, () =>
+    getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
+  );
+  const { addItem: addTrip, isPending: isAddingTrip } = useAddItem(
+    addItem,
+    queryKey,
   );
   const [tripsType, setTripsType] = useState("allTrips");
   if (isPending) return <LoadingSpinner />;
@@ -45,8 +55,23 @@ function Trip() {
             boxType="pendingTrips"
           />
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <TripDurationFilter />
+          <PrimaryButton onClick={() => setShowAddTripForm(true)}>
+            Add Trip
+          </PrimaryButton>
+          {showAddTripForm && (
+            <Modal>
+              <OperationTripForm
+                operationFn={addTrip}
+                isPending={isAddingTrip}
+                closeForm={() => setShowAddTripForm(false)}
+                description="Fill the following details to add new trip"
+                submitBtnName="Add Trip"
+                name="Add Trip"
+              />
+            </Modal>
+          )}
         </div>
       </div>
       <div className="lg:pr-8">

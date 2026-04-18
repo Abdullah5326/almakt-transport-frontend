@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
-import FilterButtons from "../features/Overview/FilterButtons";
-import OverviewCard from "../features/Overview/OverviewCard";
+import { useDispatch, useSelector } from "react-redux";
+import FilterButtons from "../ui/FilterButtons";
+import OverviewCard from "../features/Analytics/OverviewCard";
 import { useGetItems } from "../hooks/useGetItems";
 import { getAllItems } from "../services/apiServices";
 import LoadingSpinner from "../ui/LoadingSpinner";
@@ -13,8 +13,11 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineWallet,
 } from "react-icons/hi2";
+import FilterButton from "../ui/FilterButton";
+import { changeTripsDurationType } from "../features/trip/tripSlice";
 
-function SeeDetails() {
+function Analytics() {
+  const dispatch = useDispatch();
   const { tripsDurationType } = useSelector((state) => state.trip);
   const { data: trips, isPending: isLoadingTrips } = useGetItems(
     `trips-by-duration?duration=${tripsDurationType}`,
@@ -38,7 +41,6 @@ function SeeDetails() {
             new Date(new Date().setHours(0, 0, 0, 0)),
         )
         .reduce((prev, item) => prev + item.amount, 0);
-      console.log(dailyMaintenanceAmount);
       return dailyMaintenanceAmount;
     }
     if (tripsDurationType === "weekly") {
@@ -65,10 +67,6 @@ function SeeDetails() {
     if (tripsDurationType === "yearly") {
       const yearlyMaintenanceAmount = maintenances
         .filter((item) => {
-          console.log(
-            new Date(item.maintenanceDate),
-            new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-          );
           return (
             new Date(item.maintenanceDate) >=
             new Date(new Date().setFullYear(new Date().getFullYear() - 1))
@@ -90,7 +88,36 @@ function SeeDetails() {
             Track your fleet's real-time performance, revenue, and key
             operational statistics.
           </p>
-          <FilterButtons />
+          <FilterButtons>
+            <FilterButton
+              onClick={() => dispatch(changeTripsDurationType("daily"))}
+              focusValue="daily"
+              filterType={tripsDurationType}
+            >
+              Daily Overview
+            </FilterButton>
+            <FilterButton
+              onClick={() => dispatch(changeTripsDurationType("weekly"))}
+              focusValue="weekly"
+              filterType={tripsDurationType}
+            >
+              Weekly Stats
+            </FilterButton>
+            <FilterButton
+              onClick={() => dispatch(changeTripsDurationType("monthly"))}
+              focusValue="monthly"
+              filterType={tripsDurationType}
+            >
+              Monthly Report
+            </FilterButton>
+            <FilterButton
+              onClick={() => dispatch(changeTripsDurationType("yearly"))}
+              focusValue="yearly"
+              filterType={tripsDurationType}
+            >
+              Yearly Summary
+            </FilterButton>
+          </FilterButtons>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-y-8">
@@ -165,4 +192,4 @@ function SeeDetails() {
   );
 }
 
-export default SeeDetails;
+export default Analytics;

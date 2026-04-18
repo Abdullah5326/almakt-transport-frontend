@@ -80,6 +80,25 @@ function AddMaintenanceAmountForm({
         <EmptyFieldErrorMessage message={errors.vehicle?.message} />
       </FormInputBox>
       <FormInputBox>
+        <Label>Maintenance Category</Label>
+
+        <SelectInput
+          options={[
+            { label: "Diesel", value: "diesel" },
+            { label: "Oil Change", value: "oil-change" },
+            { label: "Spare Parts", value: "spare-parts" },
+            { label: "Labour Charge", value: "labour-charge" },
+          ]}
+          optionName="label"
+          placeholder={"Select category"}
+          control={control}
+          name={"category"}
+          errMsg={"Please select the category"}
+        />
+
+        <EmptyFieldErrorMessage message={errors.category?.message} />
+      </FormInputBox>
+      <FormInputBox>
         <Label labelName="">Description</Label>
         <Input
           register={register}

@@ -1,5 +1,4 @@
-import { Children } from "react";
-import { HiArrowTrendingUp, HiOutlineCheck } from "react-icons/hi2";
+import { HiArrowTrendingUp } from "react-icons/hi2";
 import CountUp from "react-countup";
 
 function OverviewCard({ name, value, percentChange, onClick, children }) {

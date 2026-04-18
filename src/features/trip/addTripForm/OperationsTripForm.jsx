@@ -16,28 +16,13 @@ function OperationTripForm({
   closeForm,
   submitBtnName,
 }) {
-  const today = new Date().toISOString().split("T")[0];
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: defaultValues
-      ? defaultValues
-      : {
-          name: "Trip to new",
-          origin: "Lahore Multan",
-          destination: "Karachi Landa Bazar",
-          startDate: today,
-          deadlineDate: new Date(
-            `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate() + 10}`,
-          )
-            .toISOString()
-            .split("T")[0],
-          tripPrice: 50000,
-          receivedAmount: 25000,
-        },
+    defaultValues: defaultValues ? defaultValues : "",
   });
   function onSubmit(data) {
     if (data)

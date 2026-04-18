@@ -2,10 +2,11 @@
 
 @theme {
   --animate-showForm: showForm 0.3s ease;
+  --animate-expandSidebarItemOptions: expandSidebarItemOptions 0.3s ease;
 }
 @layer components {
   .active {
-    @apply bg-stone-100;
+    @apply bg-orange-300;
   }
   .custom-select .ant-select {
     background-color: black !important;
@@ -83,5 +84,14 @@
   100% {
     opacity: 100%;
     transform: scale(1);
+  }
+}
+
+@keyframes expandSidebarItemOptions {
+  0% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0%);
   }
 }

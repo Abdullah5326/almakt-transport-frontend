@@ -9,7 +9,7 @@ function Layout() {
   const [showSmallNav, setShowSmallNav] = useState(false);
   const mainContainerRef = useRef(null);
   return (
-    <div className=" bg-stone-200 h-screen overflow-hidden  ">
+    <div className=" h-screen overflow-hidden  ">
       <div className="w-full h-full">
         <Navbar showSmallNav={showSmallNav} setShowSmallNav={setShowSmallNav} />
         <div className="flex w-full h-full">
@@ -21,7 +21,7 @@ function Layout() {
           )}
           <main
             ref={mainContainerRef}
-            className="bg-stone-100 h-full w-full overflow-y-auto pb-20"
+            className="bg-stone-50 h-full w-full overflow-y-auto pb-20"
           >
             <Outlet context={{ scrollableContainer: mainContainerRef }} />
           </main>

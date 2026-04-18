@@ -44,7 +44,7 @@ function DriverListItem({
       </p>
 
       <p className="hidden md:block">{driver?.creditAmount || "-"}</p>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pr-8">
         <p
           className={`${driver.status === "active" && "bg-green-500"} ${driver.status === "inactive" && "bg-red-500"} 
       ${driver.status === "onLeave" && "bg-yellow-500"} text-white rounded-full px-2 `}

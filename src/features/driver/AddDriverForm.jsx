@@ -18,20 +18,13 @@ function AddDriverForm({
   name,
   description,
 }) {
-  console.log(defaultValues);
-
   const {
     handleSubmit,
     register,
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: defaultValues || {
-      name: "Abdullah",
-      basicSalary: 4023,
-      idCardExpiryDate: "2026-04-20",
-      mobileNo: "03163942308",
-    },
+    defaultValues: defaultValues || "",
   });
   const { data: vehicles, isPending: isLoadingDrivers } = useGetItems(
     "vehicles",

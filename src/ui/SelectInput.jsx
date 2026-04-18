@@ -10,7 +10,6 @@ function SelectInput({
   name,
   value,
 }) {
-  console.log(options);
   return (
     <Controller
       name={name}
@@ -19,7 +18,6 @@ function SelectInput({
       render={({ field }) => (
         <Select
           {...field}
-          // defaultValue={options[0][optionName]}
           showSearch={{ optionFilterProp: "label" }}
           placeholder={placeholder}
           style={{ height: 41, color: "black" }}

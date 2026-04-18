@@ -99,7 +99,7 @@ function TripItem({ trip, showOperationTripId, setShowOperationTripId }) {
         {new Date(trip.startDate).toLocaleDateString()}
       </p>
       <p className="">{new Date(trip.deadlineDate).toLocaleDateString()}</p>
-      <div className="flex justify-between items-center  pl-2 ">
+      <div className="flex justify-between items-center  pr-8 ">
         <p
           className={`  text-white text-sm rounded-full  px-2 sm:px-3  justify-self-start flex`}
         >
@@ -125,7 +125,7 @@ function TripItem({ trip, showOperationTripId, setShowOperationTripId }) {
               setShowOperationTripId(trip._id);
             }}
           >
-            <HiDotsVertical />{" "}
+            <HiDotsVertical />
           </span>
           {showOperationTripId === trip._id && (
             <OperationMenu
