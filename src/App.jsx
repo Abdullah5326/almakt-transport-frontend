@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Maintenance from "./pages/Maintenance";
 import Analytics from "./pages/Analytics";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/vehicles" element={<Vehicle />} />
             <Route path="/maintenance" element={<Maintenance />} />
             <Route path="/see-analytics" element={<Analytics />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<PageNotFound />} />

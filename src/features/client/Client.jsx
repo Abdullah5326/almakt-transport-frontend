@@ -58,7 +58,7 @@ function Client() {
             <p>Status</p>
           </div>
           <ul className="divide-y divide-stone-100 overflow-y-auto h-[90vh] relative">
-            {clients.length === 11 ? (
+            {clients.length === 0 ? (
               <EmptyListText />
             ) : (
               clients.map((client, i) => (

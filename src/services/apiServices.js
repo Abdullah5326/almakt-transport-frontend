@@ -1,8 +1,7 @@
-// const CLOUD_URL = "http://localhost:3000/api/v1";
-const CLOUD_URL = "https://almakt-transport-backend.onrender.com/api/v1";
+import { LOCALE_URL } from "../../constants";
 
 export async function getAllItems(endpoint) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}`, {
+  const res = await fetch(`${LOCALE_URL}/${endpoint}`, {
     credentials: "include",
   });
 
@@ -13,7 +12,7 @@ export async function getAllItems(endpoint) {
 }
 
 export async function addItem(endpoint, item) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}`, {
+  const res = await fetch(`${LOCALE_URL}/${endpoint}`, {
     method: "POST",
     body: JSON.stringify(item),
     headers: {
@@ -35,7 +34,7 @@ export async function addItem(endpoint, item) {
 }
 
 export async function getItem(endpoint, id) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}/${id}`, {
+  const res = await fetch(`${LOCALE_URL}/${endpoint}/${id}`, {
     credentials: "include",
   });
 
@@ -46,7 +45,7 @@ export async function getItem(endpoint, id) {
 }
 
 export async function updateItem(updateData, endpoint) {
-  const res = await fetch(`${CLOUD_URL}/${endpoint}/${updateData._id}`, {
+  const res = await fetch(`${LOCALE_URL}/${endpoint}/${updateData._id}`, {
     method: "PATCH",
     body: JSON.stringify(updateData),
     headers: {
@@ -63,7 +62,7 @@ export async function updateItem(updateData, endpoint) {
 }
 
 export async function deleteItem(resourceName, id) {
-  const res = await fetch(`${CLOUD_URL}/${resourceName}/${id}`, {
+  const res = await fetch(`${LOCALE_URL}/${resourceName}/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

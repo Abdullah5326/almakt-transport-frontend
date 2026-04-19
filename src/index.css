@@ -63,6 +63,43 @@
     mask-composite: subtract;
     animation: spinnerSmall 1s infinite linear;
   }
+
+  .spinner-extra-small {
+    width: 15px;
+    aspect-ratio: 1;
+    display: grid;
+    border-radius: 50%;
+    background:
+      linear-gradient(
+          0deg,
+          rgb(255 165 0 / 50%) 30%,
+          #0000 0 70%,
+          rgb(255 165 0 / 100%) 0
+        )
+        50%/8% 100%,
+      linear-gradient(
+          90deg,
+          rgb(255 165 0 / 25%) 30%,
+          #0000 0 70%,
+          rgb(255 165 0 / 75%) 0
+        )
+        50%/100% 8%;
+    background-repeat: no-repeat;
+    animation: spinnerLarge 1s infinite steps(12);
+  }
+  .spinner-extra-small::before,
+  .spinner-extra-small::after {
+    content: "";
+    grid-area: 1/1;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.915;
+    transform: rotate(30deg);
+  }
+  .spinner-extra-small::after {
+    opacity: 0.83;
+    transform: rotate(60deg);
+  }
   @keyframes spinnerLarge {
     to {
       transform: rotate(1turn);
