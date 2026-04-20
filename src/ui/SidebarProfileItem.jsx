@@ -13,7 +13,7 @@ function SidebarProfileItem() {
   return (
     <div className="flex justify-between items-center border-t border-orange-300 pt-4 px-4">
       <div
-        className="flex gap-3 cursor-pointer"
+        className="flex gap-3 cursor-pointer items-center"
         onClick={() => navigate("/profile")}
       >
         <ProfileImage name={user.profileImg} />

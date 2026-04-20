@@ -40,14 +40,26 @@ export async function logout() {
 
 export async function updateMe(formData) {
   console.log(formData);
-
-  const res = await fetch(`${LOCALE_URL}/users/updateMe`, {
-    method: "PATCH",
-    body: formData,
-    credentials: "include",
-  });
+  let res;
+  if (formData instanceof FormData) {
+    res = await fetch(`${LOCALE_URL}/users/updateMe`, {
+      method: "PATCH",
+      body: formData,
+      credentials: "include",
+    });
+  } else {
+    console.log(formData);
+    res = await fetch(`${LOCALE_URL}/users/updateMe`, {
+      method: "PATCH",
+      body: JSON.stringify(formData),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
   const data = await res.json();
-
+  console.log(data, "data");
   if (!res.ok) throw new Error("There is an error to update your photo.");
 
   return data;

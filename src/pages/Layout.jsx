@@ -9,10 +9,10 @@ function Layout() {
   const [showSmallNav, setShowSmallNav] = useState(false);
   const mainContainerRef = useRef(null);
   return (
-    <div className=" h-screen overflow-hidden  ">
-      <div className="w-full h-full">
+    <div className="bg-stone-50 h-screen overflow-hidden  ">
+      <div className="w-full h-full ">
         <Navbar showSmallNav={showSmallNav} setShowSmallNav={setShowSmallNav} />
-        <div className="flex w-full h-full">
+        <div className="grid grid-cols-[17rem_1fr] w-full h-full">
           {(showSmallNav || windowWidth > 1000) && (
             <Sidebar
               showSmallNav={showSmallNav}

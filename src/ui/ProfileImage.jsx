@@ -6,7 +6,7 @@ function ProfileImage({ name }) {
       <img
         src={`${SERVER_IMG_URL}/img/users/${name}`}
         alt="Profile Picture"
-        className="h-11 w-11 rounded-full"
+        className="h-11 rounded-full"
       />
     </div>
   );

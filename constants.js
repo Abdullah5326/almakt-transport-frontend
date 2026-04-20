@@ -1,8 +1,9 @@
-export const SERVER_IMG_URL = false
+const useLocal = false;
+export const SERVER_IMG_URL = useLocal
   ? "http://localhost:3000"
   : "https://almakt-transport-backend.onrender.com";
 
 export const CLOUD_URL = "http://localhost:3000/api/v1";
-export const LOCALE_URL = false
+export const LOCALE_URL = useLocal
   ? "http://localhost:3000/api/v1"
   : "https://almakt-transport-backend.onrender.com/api/v1";

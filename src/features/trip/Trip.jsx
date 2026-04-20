@@ -12,18 +12,21 @@ import Modal from "../../ui/Modal";
 import OperationTripForm from "./addTripForm/OperationsTripForm";
 import { useAddItem } from "../../hooks/useAddItem";
 import PrimaryButton from "../../ui/PrimaryButton";
+import TripFilterType from "../../ui/TripFilterType";
 
 function Trip() {
   const [showAddTripForm, setShowAddTripForm] = useState(false);
   const { tripsDurationType } = useSelector((state) => state.trip);
   const queryKey = `trips`;
-  const { data: trips, isPending } = useGetItems(queryKey, () =>
-    getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
+  const { data: trips, isPending } = useGetItems(
+    `trips-by-duration?duration=${tripsDurationType}`,
+    () => getAllItems(`trips/trips-by-duration?duration=${tripsDurationType}`),
   );
   const { addItem: addTrip, isPending: isAddingTrip } = useAddItem(
     addItem,
-    queryKey,
+    `trips-by-duration?duration=${tripsDurationType}`,
   );
+  console.log(trips);
   const [tripsType, setTripsType] = useState("allTrips");
   if (isPending) return <LoadingSpinner />;
   const pendingTrips = trips.filter((trip) => !trip.isCompleted);
@@ -55,11 +58,13 @@ function Trip() {
             boxType="pendingTrips"
           />
         </div>
-        <div className="flex flex-col gap-4">
-          <TripDurationFilter />
-          <PrimaryButton onClick={() => setShowAddTripForm(true)}>
-            Add Trip
-          </PrimaryButton>
+        <div className="flex flex-col items-end gap-4">
+          <TripFilterType />
+          <div className="w-33">
+            <PrimaryButton onClick={() => setShowAddTripForm(true)}>
+              Add Trip
+            </PrimaryButton>
+          </div>
           {showAddTripForm && (
             <Modal>
               <OperationTripForm

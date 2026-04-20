@@ -12,7 +12,7 @@ import SidebarProfileItem from "./SidebarProfileItem";
 function Sidebar({ showSmallNav, setShowSmallNav }) {
   return (
     <aside
-      className={`w-13 lg:w-[17.66rem] absolute lg:relative bg-orange-400 text-white h-screen z-3`}
+      className={` absolute lg:relative bg-orange-400 text-white h-screen z-3`}
       onClick={() => setShowSmallNav(false)}
     >
       <div className=" w-full flex flex-col justify-between  h-[90vh]">

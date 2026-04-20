@@ -13,7 +13,7 @@ function User() {
       <ProfileHeader user={user} />
 
       <ProfilePersonalSection user={user} />
-      <ProfileAddressSection />
+      <ProfileAddressSection user={user} />
     </div>
   );
 }

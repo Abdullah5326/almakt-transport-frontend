@@ -1,4 +1,6 @@
-function PrimaryButton({ children, onClick }) {
+import SmallSpinner from "./SmallSpinner";
+
+function PrimaryButton({ children, onClick, disabledValue }) {
   return (
     <button
       className="bg-orange-400 hover:bg-orange-500 transition-all duration-300 text-sm text-white px-2 py-1 w-full 
@@ -8,6 +10,7 @@ function PrimaryButton({ children, onClick }) {
       }}
     >
       {children}
+      {disabledValue && <SmallSpinner />}
     </button>
   );
 }
